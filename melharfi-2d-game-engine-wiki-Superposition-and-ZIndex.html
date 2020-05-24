@@ -1,0 +1,352 @@
+<html>
+    <head>
+        <title>Author Web Page</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="highlight/styles/dracula.css">
+        <script src="highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <!----NavigationBar---->
+        <section id="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src="img/logo.jpg"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="index.html">HOME</a>
+                    <a class="nav-item nav-link" href="repos.html">REPOS</a>
+                  </div>
+                </div>
+              </nav>
+        </section>
+        <!----Slider---->
+        <div id="slider">
+            <div id="headerSlider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
+                  <li data-target="#headerSlider" data-slide-to="1"></li>
+                  <li data-target="#headerSlider" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="img/1.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Welcome to The-Morpher Github Page</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/2.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Love programming and discover new technologies</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/3.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>All my repos is shared</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/4.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Feel free to give me a hint if anything need a tweak</h5>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+        </div>
+        <!----Repos---->
+        <section id="repos">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10">
+                <h2>Repos</h2>
+                <div class="repos-content">
+                  <div class="repos-content-job-title" style="color: darkcyan;">
+                    <img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/logo.png"><br>
+                    MELHARFI-2D-Game-Engine.
+                  </div>
+                  <div class="repos-content-sub">
+                    <a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a>
+
+                    <p><b>01. Initializing MELHARFI engine</b></p>
+                    Welcome to the MELHARFI 2D Game Engine wiki!<br>
+                    Hi guys in this tutorial we are going step by step to discover all features of that engine.<br>
+                    I will make sure to explain in details all posibilities of what we can do, and for that i will use Visual Studio with C# language but you can use VB.Net as well since it work under .NET Framwork 4.0 or higher.<br>
+                  
+                    <p><b>Pre Requirement</b></p>
+                    <p>Preference Visual studio 2017 or above, i am using 2019  frensh version for this tutorial.</p>
+                    <p>
+                      <img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg1.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg1')">
+                    </p>
+                    <p>Application Windows Form (.Net Framework).</p>
+                    <p>
+                      <img id="myImg2" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg2.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg2')">
+                    </p>
+                    <p>Name it 2dProject or anything you want</p>
+                    <p>
+                      <img id="myImg3" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg3.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg3')">
+                    </p>
+                    <p>>Now we need to fix a size for our form, choose what you fit
+                      <img id="myImg4" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg4.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg4')">
+                    </p>
+
+                    <p><b>Integration of MELHARFI.dll</b></p>
+                    <p>You have 2 choices either downloading release under <a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine/releases">release</a> and add MELHARFI.dll manually to references.</p>
+                    <p>Or the easiest way using nuget</p>
+                      <img id="myImg5" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg5.PNG" alt="" width="780" height="439" onclick="ShowModalImage('myImg5')"><br>
+                      <img id="myImg6" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg6.PNG" alt="" width="800" height="398" onclick="ShowModalImage('myImg6')">
+                    </p>
+                    <p>Make sure the project is well loaded and no error is found (1) and is referenced (2)<br>
+                      <img id="myImg7" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg7.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg7')">
+                    </p>
+                  
+                    <p><b>Surface to draw in</b></p>
+                    <p>Our representation will be drawn in a Windows Control, meaning that all controls given by your IDE as Form, Panel, even inside a button or picture as long as it's a control object.</p>
+                    <p>But for our case we ar going to use the form itself as placeholder for our drawing shapes, but before we need to explain some details.</p>
+                    <p><b>What is Manager object ?</b></p>
+                    <p>It's a class that you should instanciate to handle you game/app contente, you can create more than 1 instance, each one has it's own layers (background, objects, top, control) and are completely isolated.</p>
+                  
+                    <p><b>How many Manager instance of the MELHARFI game engine do i need ?</b></p>
+                    <p>Now you have to decide WHERE SHOULD I DRAW ?</p>
+                    <p>1- Consider that all the surface of the screen is for the game, in that case you can chose the main form itself as a placeholder for your game, and you only need to create 1 instance.</p>
+                    <p>2- Consider you will use a special surface to draw your game content (First instance of the Manager) maybe a panel inside your form that cover majority of the form or the whole form itself, and another small area "panel" for your hud in foot section of your form (Second instance of your game engine), and anoter area "panel or whatever" for another purpose like a menu in the left side (Third instance of your game engine)</p>
+
+                    <p><b>So what's make the difference between both way ?</b></p>
+                    <p>All depend on your game logic and how its complexity, if it's a simple game only one instance of your game engine is sufficient as you just need to know how to deal with the different sections.</p>
+                    <p>If your game is a bit mature or need advanced architecture, you need more than one instance of the Manager instance.</p>
+                    <p>-one instance to draw your game content Non-Static (meaning content is changing all the time when player move or map is changed ...).</p>
+                    <p>-second instance for your hud content Static (the hud usually doesn't change apart some lifepoint could be changed but most of the time it's considered as a second portion of your game), it's usful when you want to clear, modify or remove your screen game (player has changed map) so in this case you don't want to remove your hud, menu and other stuff not considered as a part of your game content, so in this case you don't have to worry about that because hud, menu ... are handled by the other instance of your game engine.</p>
+                    <p><b>Chose a resolution of form</b></p>
+                    <p>Considering that your main form is suited to your game drawing land.</p>
+                    <p>First you have to chose a resolution suited for you, for exemple let's make it 800x600 (800 pixel for width, 600 pixel for height) we also want it to be fixed, not resizable "FormBorderSyle = FixedSingle", you can manage other stuff like rename the label of the game , the engine does not allow to resize the screen, it only draw item to a control with there original size.</p>
+
+                    <p><b>Initializing the game and apply a background color</b></p>
+                    <p>Next step is to create an instance of our game engine "Manager" and for that, go to the code section, right clic on your main form and chose "View Code" or clic F7 shortcut.</p>
+                    <p>You need to add reference of MELHARFI library to you class</p>
+                    <p>
+                    <pre>
+                      <code class="csharp">
+using MELHARFI;
+using MELHARFI.Manager;
+                      </code>
+                    </pre>
+                    <img id="myImg8" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg8.PNG" alt="" width="462" height="340" onclick="ShowModalImage('myImg8')">
+                    </p>
+                    <p>Assuming your game is basic and need only one instance of your game engine add this line in the Form1 class constuctor:</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Manager manager = new Manager(this, "name_of_Instance_like_CORE_ENGINE");
+                        </code>
+                      </pre>
+                      <p><img id="myImg9" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg9.PNG" alt="" width="595" height="326" onclick="ShowModalImage('myImg9')"></p>
+                    </p>
+                    <p>The name given to the constructor give a meaning of the current instance, we'll cover its uility later.</p>
+                    <p>By default the background color is black, so if you compile your project you'll see a black window.</p>
+                    <p>To change the background color just add this line</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+manager.Background = Color.Blue;
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img id="myImg10" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg10.PNG" alt="" width="616" height="378" onclick="ShowModalImage('myImg10')"></p>
+                    <p>And just run your code to see a beautiful window</p>
+                    <p><img id="myImg11" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg11.PNG" alt="" onclick="ShowModalImage('myImg11')"></p>
+                    <p>If you experience some kind of Flickering of screen, it's an issue in GDI+ that you can resolve by adding that peace of code in top of your main form code just after InitializeComponent();</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+this.Invalidate();
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img id="myImg12" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/1/createProjecrImg12.PNG" alt="" onclick="ShowModalImage('myImg12')"></p>
+                    </p>
+                    <p><b>FPS or Refresh Rate</b></p>
+                    <p>By default the rendering time to screen is refreshed 40 times per second, if by any reason you want to modify that variable, just add this line :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Manager manager = new Manager(this, "CORE_ENGINE");
+manager.Background = Color.Blue;                          
+manager.Fps = 60;
+                        </code>
+                      </pre>
+                    </p>
+                    <p>That Fps value make sure to update a timer interval inside the Manager game loop to refresh screen using the method <b>Manager.refreshTimer</b></p>
+                    <p>It's the same as doing :</p>
+
+                    <p>
+                      <pre>
+                        <code class="csharp">
+manager.refreshTimer.Interval = Fps;
+                        </code>
+                      </pre>
+                    </p>
+                    <p>Please notice that the Manager is specialy used for dealing with graphic stuff.</p>
+                    <p>You can find many thing around rendering and so and you can discover this using intellisense</p>
+                    <button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html'">Next Chapter 02. Superposition and ZIndex>></button>
+
+
+
+                  </div>
+
+
+                </div>
+              </div>
+              <!----Summary---->
+              <div class="col-md-2 skills-bar">
+                <p style="color: cadetblue; font-size: 20px;">Summary</p>
+                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
+                <p><b>>>01. Initializing MELHARFI engine</b></p>
+                <p>02. Superposition and ZIndex</p>
+                <p>03. Drawing classes</p>
+                <p>04. Bmp (Bitmap)</p>
+                <p>05. Rec (Rectangle)</p>
+                <p>06. Anim (Animation)</p>
+                <p>07. Txt (Text)</p>
+                <p>08. FillPolygon (shapes)</p>
+                <p>09. Error handling</p>
+                <p>10. Mouse events</p>
+                <p>11. Controls and ControlLayer</p>
+                <p>12. Remove, Clean, FixedObjectLayer</p>
+                <p>13. Cryptography</p>
+                <p>14. Show, Hide</p>
+                <p>15. Interface Igfx</p>
+                <p>16. Tag</p>
+                <p>17. Child</p>
+                <p>18. SpriteSheet</p>
+                <p>19. Converting color</p>
+                <p>20. AStar pathfinding</p>
+                <p>21. LidgrenNetwork</p>
+                <p>22. Drawing Surface</p>
+                <p>23. Flickering issue</p>
+              </div>
+              <!----End Summary---->
+            </div>
+          </div>
+        </section>
+        <!----Services---->
+        <section id="services">
+          <div class="container">
+            <h1>Services</h1>
+            <div class="row services">
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-desktop"></i>
+                </div>
+                <h3>App Developpement</h3>
+                <p>Want me to dev an app for you ? dont hesitate to contact me.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                </div>
+                <h3>Programming</h3>
+                <p>Are you looking for a coder/teammate for your project ? Let's give it a try.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <h3>Job Invitation</h3>
+                <p>Have a proposal for me ? we can discuss about it.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-cc-paypal"></i>
+                </div>
+                <h3>Donation maybe ?!</h3>
+                <p>You want to buy me a coffe ? m.elharfi@gmail.com</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick" />
+                  <input type="hidden" name="hosted_button_id" value="VN92ND2CDMX92" />
+                  <input type="image" src="https://www.paypalobjects.com/en_US/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                  <img alt="" border="0" src="https://www.paypal.com/en_FR/i/scr/pixel.gif" width="1" height="1" />
+                  </form>
+                  
+              </div>
+            </div>
+          </div>
+        </section>
+        <!----End Services-->
+        <!----Image click to enlarge---->
+        <!-- Trigger the Modal -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- The Close Button -->
+          <span id="close" class="close" onclick="CloseSpan()">&times;</span>
+          <!-- Modal Content (The Image) -->
+          <img id="newMyImg" class="modal-content">
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
+        </div> 
+        <!--------End image click to enlarge-------->
+    </body>
+</html>
+
+<script language="javascript">
+//button toggle show/hide div
+function myFunction()
+{
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none")
+  {
+    x.style.display = "block";
+  }
+  else
+  {
+    x.style.display = "none";
+  }
+} 
+///////////Modal////////////
+var span = document.getElementById("close");
+var modal = document.getElementById("myModal");
+var modalImg = document.getElementById("newMyImg");
+function ShowModalImage(myImg)
+{
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById(myImg);
+  var captionText = document.getElementById("caption");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+  captionText.innerHTML = img.alt;
+}
+function CloseSpan()
+{
+  modal.style.display = "none";
+}
+/***Detect Esc btton to close Modal***/
+document.addEventListener('keydown', function(event){
+	if(event.key === "Escape"){
+		CloseSpan()
+	}
+});
+/***Hide modal when mouse clic***/
+modal.onclick = function(){
+		CloseSpan()
+};
+/////////////////////////////////////////
+</script>
