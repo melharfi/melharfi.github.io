@@ -81,65 +81,67 @@
                 <h2>Repos</h2>
                 <div class="repos-content">
                   <div class="repos-content-job-title" style="color: darkcyan;">
-                    <img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/logo.png"><br>
-                    MELHARFI-2D-Game-Engine.
+                    <p><img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/logo.png"></p>
+                    <b>MELHARFI-2D-Game-Engine.</b>
                   </div>
                   <div class="repos-content-sub">
-                    <a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a>
+                    <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
 
-                    <p><b>01. Initializing MELHARFI engine</b></p>
-                    Welcome to the MELHARFI 2D Game Engine wiki!<br>
-                    Hi guys in this tutorial we are going step by step to discover all features of that engine.<br>
-                    I will make sure to explain in details all posibilities of what we can do, and for that i will use Visual Studio with C# language but you can use VB.Net as well since it work under .NET Framwork 4.0 or higher.<br>
+                    <p><b><li>Initializing MELHARFI engine</li></b></p>
+                    <p>Welcome to the MELHARFI 2D Game Engine wiki!</p>
+                    <p></p>Hi guys in this tutorial we are going step by step to discover all features of that engine.</p>
+                    <p>I will make sure to explain in details all posibilities of what we can do, and for that i will use Visual Studio with C# language but you can use VB.Net as well since it work under .NET Framwork 4.0 or higher.</p>
                   
-                    <p><b>Pre Requirement</b></p>
+                    <p><b><li>Pre Requirement</li></b></p>
                     <p>Preference Visual studio 2017 or above, i am using 2019  frensh version for this tutorial.</p>
                     <p>
-                      <img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg1.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg1')">
+                      <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg1.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg1')"></p>
                     </p>
                     <p>Application Windows Form (.Net Framework).</p>
                     <p>
-                      <img id="myImg2" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg2.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg2')">
+                      <p><img id="myImg2" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg2.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg2')"></p>
                     </p>
                     <p>Name it 2dProject or anything you want</p>
                     <p>
-                      <img id="myImg3" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg3.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg3')">
+                      <p><img id="myImg3" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg3.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg3')"></p>
                     </p>
                     <p>>Now we need to fix a size for our form, choose what you fit
-                      <img id="myImg4" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg4.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg4')">
+                      <p><img id="myImg4" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg4.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg4')"></p>
                     </p>
 
-                    <p><b>Integration of MELHARFI.dll</b></p>
+                    <p><b><li>Integration of MELHARFI.dll</li></b></p>
                     <p>You have 2 choices either downloading release under <a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine/releases">release</a> and add MELHARFI.dll manually to references.</p>
                     <p>Or the easiest way using nuget</p>
-                      <img id="myImg5" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg5.PNG" alt="" width="780" height="439" onclick="ShowModalImage('myImg5')"><br>
-                      <img id="myImg6" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg6.PNG" alt="" width="800" height="398" onclick="ShowModalImage('myImg6')">
+                      <p><img id="myImg5" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg5.PNG" alt="" width="780" height="439" onclick="ShowModalImage('myImg5')"></p>
+                      <p><img id="myImg6" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg6.PNG" alt="" width="800" height="398" onclick="ShowModalImage('myImg6')"></p>
                     </p>
                     <p>Make sure the project is well loaded and no error is found (1) and is referenced (2)<br>
-                      <img id="myImg7" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg7.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg7')">
+                      <p><img id="myImg7" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg7.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg7')"></p>
                     </p>
                   
-                    <p><b>Surface to draw in</b></p>
+                    <p><b><li>Surface to draw in</li></b></p>
                     <p>Our representation will be drawn in a Windows Control, meaning that all controls given by your IDE as Form, Panel, even inside a button or picture as long as it's a control object.</p>
                     <p>But for our case we ar going to use the form itself as placeholder for our drawing shapes, but before we need to explain some details.</p>
-                    <p><b>What is Manager object ?</b></p>
+                    
+                    <p><b><li>What is Manager object ?</li></b></p>
                     <p>It's a class that you should instanciate to handle you game/app contente, you can create more than 1 instance, each one has it's own layers (background, objects, top, control) and are completely isolated.</p>
                   
-                    <p><b>How many Manager instance of the MELHARFI game engine do i need ?</b></p>
+                    <p><b><li>How many Manager instance of the MELHARFI game engine do i need ?</li></b></p>
                     <p>Now you have to decide WHERE SHOULD I DRAW ?</p>
                     <p>1- Consider that all the surface of the screen is for the game, in that case you can chose the main form itself as a placeholder for your game, and you only need to create 1 instance.</p>
                     <p>2- Consider you will use a special surface to draw your game content (First instance of the Manager) maybe a panel inside your form that cover majority of the form or the whole form itself, and another small area "panel" for your hud in foot section of your form (Second instance of your game engine), and anoter area "panel or whatever" for another purpose like a menu in the left side (Third instance of your game engine)</p>
 
-                    <p><b>So what's make the difference between both way ?</b></p>
+                    <p><b><li>So what's make the difference between both way ?</li></b></p>
                     <p>All depend on your game logic and how its complexity, if it's a simple game only one instance of your game engine is sufficient as you just need to know how to deal with the different sections.</p>
                     <p>If your game is a bit mature or need advanced architecture, you need more than one instance of the Manager instance.</p>
                     <p>-one instance to draw your game content Non-Static (meaning content is changing all the time when player move or map is changed ...).</p>
                     <p>-second instance for your hud content Static (the hud usually doesn't change apart some lifepoint could be changed but most of the time it's considered as a second portion of your game), it's usful when you want to clear, modify or remove your screen game (player has changed map) so in this case you don't want to remove your hud, menu and other stuff not considered as a part of your game content, so in this case you don't have to worry about that because hud, menu ... are handled by the other instance of your game engine.</p>
-                    <p><b>Chose a resolution of form</b></p>
+                    
+                    <p><b><li>Chose a resolution of form</li></b></p>
                     <p>Considering that your main form is suited to your game drawing land.</p>
                     <p>First you have to chose a resolution suited for you, for exemple let's make it 800x600 (800 pixel for width, 600 pixel for height) we also want it to be fixed, not resizable "FormBorderSyle = FixedSingle", you can manage other stuff like rename the label of the game , the engine does not allow to resize the screen, it only draw item to a control with there original size.</p>
 
-                    <p><b>Initializing the game and apply a background color</b></p>
+                    <p><b><li>Initializing the game and apply a background color</li></b></p>
                     <p>Next step is to create an instance of our game engine "Manager" and for that, go to the code section, right clic on your main form and chose "View Code" or clic F7 shortcut.</p>
                     <p>You need to add reference of MELHARFI library to you class</p>
                     <p>
@@ -149,7 +151,7 @@ using MELHARFI;
 using MELHARFI.Manager;
                       </code>
                     </pre>
-                    <img id="myImg8" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg8.PNG" alt="" width="462" height="340" onclick="ShowModalImage('myImg8')">
+                    <p><img id="myImg8" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg8.PNG" alt="" width="462" height="340" onclick="ShowModalImage('myImg8')"></p>
                     </p>
                     <p>Assuming your game is basic and need only one instance of your game engine add this line in the Form1 class constuctor:</p>
                     <p>
@@ -184,7 +186,8 @@ this.Invalidate();
                     </p>
                     <p><img id="myImg12" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg12.PNG" alt="" onclick="ShowModalImage('myImg12')"></p>
                     </p>
-                    <p><b>FPS or Refresh Rate</b></p>
+
+                    <p><b><li>FPS or Refresh Rate</li></b></p>
                     <p>By default the rendering time to screen is refreshed 40 times per second, if by any reason you want to modify that variable, just add this line :</p>
                     <p>
                       <pre>
@@ -297,7 +300,7 @@ manager.refreshTimer.Interval = Fps;
         <!-- The Modal -->
         <div id="myModal" class="modal">
           <!-- The Close Button -->
-          <span id="close" class="close" onclick="CloseSpan()">&times;</span>
+          <span class="modalClose" onclick="CloseSpan()">&times;</span>
           <!-- Modal Content (The Image) -->
           <img id="newMyImg" class="modal-content">
           <!-- Modal Caption (Image Text) -->
@@ -322,7 +325,8 @@ function myFunction()
   }
 } 
 ///////////Modal////////////
-var span = document.getElementById("close");
+//https://www.w3schools.com/howto/howto_css_modal_images.asp
+var span = document.getElementsByClassName("modalClose");
 var modal = document.getElementById("myModal");
 var modalImg = document.getElementById("newMyImg");
 function ShowModalImage(myImg)
