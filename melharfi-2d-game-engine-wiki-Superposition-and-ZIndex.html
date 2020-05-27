@@ -1,0 +1,279 @@
+<html>
+    <head>
+        <title>Author Web Page</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="highlight/styles/dracula.css">
+        <script src="highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <!----NavigationBar---->
+        <section id="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src="img/logo.jpg"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="index.html">HOME</a>
+                    <a class="nav-item nav-link" href="repos.html">REPOS</a>
+                  </div>
+                </div>
+              </nav>
+        </section>
+        <!----Slider---->
+        <div id="slider">
+            <div id="headerSlider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
+                  <li data-target="#headerSlider" data-slide-to="1"></li>
+                  <li data-target="#headerSlider" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="img/1.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Welcome to The-Morpher Github Page</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/2.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Love programming and discover new technologies</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/3.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>All my repos is shared</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/4.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Feel free to give me a hint if anything need a tweak</h5>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+        </div>
+        <!----Repos---->
+        <section id="repos">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10">
+                <h2>Repos</h2>
+                <div class="repos-content">
+                  <div class="repos-content-job-title" style="color: darkcyan;">
+                    <p><img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/logo.png"></p>
+                    <b>MELHARFI-2D-Game-Engine.</b>
+                  </div>
+                  <div class="repos-content-sub">
+                    <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
+
+                    <p><b><h3>02. Superposition and ZIndex</h3></b></p>
+                    <p>Superposition of layers</p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/3/logo2.png"></p>
+                    <p>For any 2D game, you should notice that there is background, content and top layer:</p>
+                    <p><b>BackgroundLayer</b>, is the color or a background picture, it could be many assets as the first layer and it stand in the back (layer 1)</p>
+                    <p><b>ObjectLayer</b> like players, monsters... that come front of background (layer 2)</p>
+                    <p><b>TopLayer</b>, like Hud, Chat box, Buttons... (front of content layer 3)</p>
+                    <p>The same thing is handled by this engine</p>
+                    <p><b>FixedObjectLayer</b> i add that layer to reference some object that i dont want them to be removed especially when cleaning screen, usefull when i want to redraw my screen or change it whitout touching some objects like hud which is static, that mean it's not a layer to draw objects but reference some object already drawn and not cosidered as a drawning layer therefore not superposed to the previouse layers.</p>
+                    <p><b>ControlLayer</b> in this layer we reference all Windows controls used like buttons, radio, checkbox, panel... it's necessary to reference them in case we want to hide a menu that thoses controls and we must keep a reference of them to ControlLayer to hide them or remove them, kkep in minde that those controls area always drawn in top even over TopLayer but excluded from superposition of other layers cause it store only Windows Controls not shapes.</p>
+                    <p>Thoses layers are displayed in superposition, the BackgroundLayer come first, and ObjectLayer came over the background, and TopLayer is always displayed on the Top.</p>
+                    <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/3/asset1.PNG" alt="" width="800" height="566" onclick="ShowModalImage('myImg1')"></p>
+                    <p>On each layer, you can add many item (image, shape) as you want.</p>
+                    <p>For background layer maybe you have a color background, cloud, building...</p>
+                    <p>For content layer you have your plane, and enemy planes that shoot you some missiles...</p>
+                    <p>And finally you have TopLayer to draw everything on the top like some messages, chat, hud ...</p>
+
+                    <p><b><li>Z-Index</li></b></p>
+                    <p>Another arranging step is the Z-Index</p>
+                    <p>To do that you have to use what we call a Z-INDEX parameter, it's the depth of the object inside the layer itself, like the 3rd coordinate "3D" but we are doing this in 2D gaming, some is calling that 2.5 D lol</p>
+                    <p>In each Layer as Background or Object or Top could have many objects inside, so you need a way to arange them to make some superposed over the others, like building over cloud.</p>
+                    <p>To achieve this let's say you have 3 background objects.</p>
+                    <p>Background_Color, cloud, building</p>
+                    <p>To order them with z-index you should make</p>
+                    <p>Background_Color z-index = 0;</p>
+                    <p>Cloud z-index = 1;</p>
+                    <p>Building z-index = 2;</p>
+                    <p>And you increment each time you want an object to be over another object.</p>
+                    <p>In coding, those layers are only a List of objects,</p>
+                    <p>Background layer is represented as <b>BackgroundLayer</b> (Graphics Background List).</p>
+                    <p>Object layer is represented as <b>ObjectLayer</b> (Graphics Object List).</p>
+                    <p>Top layer is represented as <b>TopLayer</b> (Graphics Top List)</p>
+                    <p>Other extra layers has been added for some issues that we are going to see later called like</p>
+                    <p><b>FixedObjectLayer</b></p>
+                    <p><b>ControlLayer</b></p>
+                    <p>And Z-index is coded line this :</p>
+                    <p>label1.zindex = 1;</p>
+                    <p>While the zindex is higher, more it's on the top.</p>
+                    <p>When creating an object without attributing a value to it's zindex, it's automatically attributed as the higher value to make it in the very top on the screen.
+                    <p>So you don't need to affect the Z-index to an object eache time as it's automatically incremented when a new object is created UNLESS if you want to make an object created at last be behind another object created from the begining, so in that case you should initialize the z-index of the last object to be less than the first one like
+                    </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Bmp building = new (@"c:\building.jpg", new Point(0, 0), manager);
+Bmp cloud = new (@"c:\cloud.jpg", new Point(0, 0), manager);
+cloud.Zindex = building.Zndex - 1;
+                        </code>
+                      </pre>
+                    </p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-drawing-classes.html'">Next Chapter 03. Drawing Classes>></button></p>
+
+                  </div>
+                </div>
+              </div>
+              <!----Summary---->
+              <div class="col-md-2 skills-bar">
+                <p style="color: cadetblue; font-size: 20px;">Summary</p>
+                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
+                <p><b>>>02. Superposition and ZIndex</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-Bmp.html">04. Bmp (Bitmap)</a></p>
+                <p>05. Rec (Rectangle)</p>
+                <p>06. Anim (Animation)</p>
+                <p>07. Txt (Text)</p>
+                <p>08. FillPolygon (shapes)</p>
+                <p>09. Error handling</p>
+                <p>10. Mouse events</p>
+                <p>11. Controls and ControlLayer</p>
+                <p>12. Remove, Clean, FixedObjectLayer</p>
+                <p>13. Cryptography</p>
+                <p>14. Show, Hide</p>
+                <p>15. Interface Igfx</p>
+                <p>16. Tag</p>
+                <p>17. Child</p>
+                <p>18. SpriteSheet</p>
+                <p>19. Converting color</p>
+                <p>20. AStar pathfinding</p>
+                <p>21. LidgrenNetwork</p>
+                <p>22. Drawing Surface</p>
+                <p>23. Flickering issue</p>
+              </div>
+              <!----End Summary---->
+            </div>
+          </div>
+        </section>
+        <!----Services---->
+        <section id="services">
+          <div class="container">
+            <h1>Services</h1>
+            <div class="row services">
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-desktop"></i>
+                </div>
+                <h3>App Developpement</h3>
+                <p>Want me to dev an app for you ? dont hesitate to contact me.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                </div>
+                <h3>Programming</h3>
+                <p>Are you looking for a coder/teammate for your project ? Let's give it a try.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <h3>Job Invitation</h3>
+                <p>Have a proposal for me ? we can discuss about it.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-cc-paypal"></i>
+                </div>
+                <h3>Donation maybe ?!</h3>
+                <p>You want to buy me a coffe ? m.elharfi@gmail.com</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick" />
+                  <input type="hidden" name="hosted_button_id" value="VN92ND2CDMX92" />
+                  <input type="image" src="https://www.paypalobjects.com/en_US/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                  <img alt="" border="0" src="https://www.paypal.com/en_FR/i/scr/pixel.gif" width="1" height="1" />
+                  </form>
+                  
+              </div>
+            </div>
+          </div>
+        </section>
+        <!----End Services-->
+        <!----Image click to enlarge---->
+        <!-- Trigger the Modal -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- The Close Button -->
+          <span class="modalClose" onclick="CloseSpan()">&times;</span>
+          <!-- Modal Content (The Image) -->
+          <img id="newMyImg" class="modal-content">
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
+        </div> 
+        <!--------End image click to enlarge-------->
+    </body>
+</html>
+
+<script language="javascript">
+//button toggle show/hide div
+function myFunction()
+{
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none")
+  {
+    x.style.display = "block";
+  }
+  else
+  {
+    x.style.display = "none";
+  }
+} 
+///////////Modal////////////
+//https://www.w3schools.com/howto/howto_css_modal_images.asp
+var span = document.getElementsByClassName("modalClose");
+var modal = document.getElementById("myModal");
+var modalImg = document.getElementById("newMyImg");
+function ShowModalImage(myImg)
+{
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById(myImg);
+  var captionText = document.getElementById("caption");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+  captionText.innerHTML = img.alt;
+}
+function CloseSpan()
+{
+  modal.style.display = "none";
+}
+/***Detect Esc btton to close Modal***/
+document.addEventListener('keydown', function(event){
+	if(event.key === "Escape"){
+		CloseSpan()
+	}
+});
+/***Hide modal when mouse clic***/
+modal.onclick = function(){
+		CloseSpan()
+};
+/////////////////////////////////////////
+</script>
