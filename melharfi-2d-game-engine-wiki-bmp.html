@@ -87,27 +87,177 @@
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
 
-                    <p><b>Bitmap</b> , it show a picture in different format, like Bmp, Jpg, Pnj ...</p>
-                    <p><b>Rectanles</b>, drawing a square box colored or not.</p>
-                    <p><b>Animation</b>, showing a successive pictures.</p>
-                    <p><b>Text</b>, drawing text with font and color ...</p>
-                    <p><b>FillPolygon</b>, to draw shapes as a polygon</p>
-                    <p>Preference Visual studio 2017 or above, i am using 2019  frensh version for this tutorial.</p>
-                    <p>These classes will be explained in next chapters</p>
-                    <p>Remember that you have to add this line :</p>
-                    
+                    <p><b><h3>04. Bmp (Bitmap)</h3></b></p>
+                    <p><b>Bmp class</b></p>
+                    <p>To draw a picture "Bitmap" you should create an instance of Bmp class. This class has 20 overloads depending on what the parameters you want to initialize. The easy one is</p>
                     <p>
-                    <pre>
-                      <code class="csharp">
-using static MELHARFI.Manager;
-                      </code>
-                    </pre>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-Bmp.html'">Next Chapter 04. Bmp>></button></p>
+                      <pre>
+                        <code class="csharp">
+Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
+                        </code>
+                      </pre>
+                    </p>
+                    <p>And here is a complete code </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
 
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.Blue;
+
+            Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
+            
+            manager.BackgroundLayer.Add(cloudPicture);
+        }
+    }
+}                          
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch3-cloud.png"></p>
+                    <p>Obiously you can chage the Position as you want</p>
+
+                    <p><b>ObjectLayer</b> Is the common asset like players, monsters... that come front of background (layer 2)</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
+manager.ObjectLayer.Add(superMario);
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch-sm.PNG"></p>
+
+                    <p>If you experiance some king of flickering of your form, you can go to Flickering chapter to fix this or add that code right in the top of your main function</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+this.Invalidate();
+
+Manager manager = new Manager(this, "CORE_ENGINE");
+manager.Background = Color.Blue;
+
+Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);            
+manager.BackgroundLayer.Add(cloudPicture);
+
+Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
+manager.ObjectLayer.Add(superMario);
+                        </code>
+                      </pre>
+                    </p>
+
+
+                    <p><b>Bmp parameters.</b></p>
+                    <p><b>Name</b> : You can associate a name to an image object so that you can fetch for it if you want to, like so :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+cloudPicture.name = "cloud1";
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p><b>Opacity</b> : cloudPicture.Opacity = 0.5F; meaning that the picture is going to be transparent by 50%, min value is 0.0F (completely transparent) and 1F is 100% opaque.</p>
+                    <p><b>Rectanle</b> : let you draw only a peace of your picture depending on a start point and the size to take.</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+cloudPicture.rectangle = new Rectangle(new Point(50, 50), new Size(60, 70));
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>The picture rendered will croped, from the position 50 X, 50 Y of the original picture, and only a rectangle of 60 pixel width and 70 pixel height will be taken, the other pieces is ignored and not displayed.</p>
+                    <p><b>typeGfx</b> : to identify object as it's type if is it a background or Object or Top</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+cloudPicture.TypeGfx = Manager.TypeGfx.Bgr;
+//or
+cloudPicture.TypeGfx = Manager.TypeGfx.Obj;
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>Useful if somehow you don't know where an object is added, if is it in background or object, so by that value you know where it’s stored by fetching like so :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+if(cloudPicture.TypeGfx == Manager.TypeGfx.Bgr)
+{
+  /*...*/
+}
+else if(cloudPicture.TypeGfx == Manager.TypeGfx.Obj)
+{
+  /*...*/
+}
+else
+{
+  /*...*/
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p><b>Visible</b> : boolean property to make picture visible or not.</p>
+                    <p><b>Z-Index</b> : depth of an object inside a layer to superpose a picture over another one as integer.</p>
+                    <p><b>Crypted</b> : is a bool flag to determine if a picture is encrypted or not, if it's so, you need my CryptDecrypt tool share in the link:.</p>
+                    <p>https://github/MELHARFI/CryptDecrypt</p>
+                    <p>This flag is self initialized 'readonly' when you create your Bmp instance as you'll specify whether the picture is encrypted or not, so you don't need to initialize it as it's done in the constructor like :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Manager manager = new Manager(this, "manager");
+manager.Background = Color.Blue;
+                          
+/*not encrypted Bmp*/
+Bmp NotEncryptedBMP = new Bmp("1.jpg", Point.Empty, manager);
+manager.BackgroundLayer.Add(NotEncryptedBMP);
+
+/*encrypted Bmp*/
+string key = "12345678";
+string iv = "87654321";
+Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
+manager.BackgroundLayer.Add(encryptedBMP);
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>To encrypt a picture you must use the CryptDecrypt tool to encrypt it first using 2 Keys you must regenerate "Key & IV"</p>
+                    <p><li>>Key</li> is the first key must be exactly 8 characters as string, (any character, number, letters, special char ..)</p>
+
+                    <p><li>IV</li> is the second key called "Initializing Vector" must be exactly 8 characters too as string, (any character, number, letters, special char ..)</p>
+                    <p>you can use the same string for both of them.</p>
+                    <p>After that you must replace your original picture by the one being encrypted and saved and then use the apropriate constructor :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p><b>isSpriteSheet</b> boolean value indicating wheter the object "Bmp" must show only a piece of the original picture or the full image, this value is read only, and it's initialized when a constructor of Bmp is called with the rectangle parameter.</p>
+                    <p>quite useful when you want to check if a Bmp object is a sprite sheet or not.</p>
+                    <p><b>newColorMap</b> is a way to convert a color to another one, meaning that each pixel with the given color is found will be changed.</p>
+                    <p>More details is in the 19 Converting-color chapter</p>
+
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-drawing-rec.html'">Next Chapter 04. Rec>></button></p>
 
                   </div>
-
-
                 </div>
               </div>
               <!----Summary---->
@@ -116,9 +266,9 @@ using static MELHARFI.Manager;
                 <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html">02. Superposition and ZIndex</a></p>
-                <p><b>>>03. Drawing classes</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p>05. Rec (Rectangle)</p>
+                <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
+                <p><b>>>04. Bmp (Bitmap)</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-drawing-rec.html">05. Rec (Rectangle)</a></p>
                 <p>06. Anim (Animation)</p>
                 <p>07. Txt (Text)</p>
                 <p>08. FillPolygon (shapes)</p>
