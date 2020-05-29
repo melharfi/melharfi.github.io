@@ -86,151 +86,83 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-
-                    <p><b><h3>Initializing MELHARFI engine</h3></b></p>
-                    <p>Welcome to the MELHARFI 2D Game Engine wiki!</p>
-                    <p>Hi guys in this tutorial we are going step by step to discover all features of that engine.</p>
-                    <p>I will make sure to explain in details all posibilities of what we can do, and for that i will use Visual Studio with C# language but you can use VB.Net as well since it work under .NET Framwork 4.0 or higher.</p>
-                  
-                    <p><b><li>Pre Requirement</li></b></p>
-                    <p>Preference Visual studio 2017 or above, i am using 2019  frensh version for this tutorial.</p>
-                    <p>
-                      <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg1.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg1')"></p>
-                    </p>
-                    <p>Application Windows Form (.Net Framework).</p>
-                    <p>
-                      <p><img id="myImg2" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg2.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg2')"></p>
-                    </p>
-                    <p>Name it 2dProject or anything you want</p>
-                    <p>
-                      <p><img id="myImg3" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg3.PNG" alt="" width="800" height="555" onclick="ShowModalImage('myImg3')"></p>
-                    </p>
-                    <p>>Now we need to fix a size for our form, choose what you fit
-                      <p><img id="myImg4" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg4.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg4')"></p>
-                    </p>
-
-                    <p><b><li>Integration of MELHARFI.dll</li></b></p>
-                    <p>You have 2 choices either downloading release under <a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine/releases">release</a> and add MELHARFI.dll manually to references.</p>
-                    <p>Or the easiest way using nuget</p>
-                      <p><img id="myImg5" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg5.PNG" alt="" width="780" height="439" onclick="ShowModalImage('myImg5')"></p>
-                      <p><img id="myImg6" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg6.PNG" alt="" width="800" height="398" onclick="ShowModalImage('myImg6')"></p>
-                    </p>
-                    <p>Make sure the project is well loaded and no error is found (1) and is referenced (2)<br>
-                      <p><img id="myImg7" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg7.PNG" alt="" width="800" height="437" onclick="ShowModalImage('myImg7')"></p>
-                    </p>
-                  
-                    <p><b><li>Surface to draw in</li></b></p>
-                    <p>Our representation will be drawn in a Windows Control, meaning that all controls given by your IDE as Form, Panel, even inside a button or picture as long as it's a control object.</p>
-                    <p>But for our case we ar going to use the form itself as placeholder for our drawing shapes, but before we need to explain some details.</p>
-                    
-                    <p><b><li>What is Manager object ?</li></b></p>
-                    <p>It's a class that you should instanciate to handle you game/app contente, you can create more than 1 instance, each one has it's own layers (background, objects, top, control) and are completely isolated.</p>
-                  
-                    <p><b><li>How many Manager instance of the MELHARFI game engine do i need ?</li></b></p>
-                    <p>Now you have to decide WHERE SHOULD I DRAW ?</p>
-                    <p>1- Consider that all the surface of the screen is for the game, in that case you can chose the main form itself as a placeholder for your game, and you only need to create 1 instance.</p>
-                    <p>2- Consider you will use a special surface to draw your game content (First instance of the Manager) maybe a panel inside your form that cover majority of the form or the whole form itself, and another small area "panel" for your hud in foot section of your form (Second instance of your game engine), and anoter area "panel or whatever" for another purpose like a menu in the left side (Third instance of your game engine)</p>
-
-                    <p><b><li>So what's make the difference between both way ?</li></b></p>
-                    <p>All depend on your game logic and how its complexity, if it's a simple game only one instance of your game engine is sufficient as you just need to know how to deal with the different sections.</p>
-                    <p>If your game is a bit mature or need advanced architecture, you need more than one instance of the Manager instance.</p>
-                    <p>-one instance to draw your game content Non-Static (meaning content is changing all the time when player move or map is changed ...).</p>
-                    <p>-second instance for your hud content Static (the hud usually doesn't change apart some lifepoint could be changed but most of the time it's considered as a second portion of your game), it's usful when you want to clear, modify or remove your screen game (player has changed map) so in this case you don't want to remove your hud, menu and other stuff not considered as a part of your game content, so in this case you don't have to worry about that because hud, menu ... are handled by the other instance of your game engine.</p>
-                    
-                    <p><b><li>Chose a resolution of form</li></b></p>
-                    <p>Considering that your main form is suited to your game drawing land.</p>
-                    <p>First you have to chose a resolution suited for you, for exemple let's make it 800x600 (800 pixel for width, 600 pixel for height) we also want it to be fixed, not resizable "FormBorderSyle = FixedSingle", you can manage other stuff like rename the label of the game , the engine does not allow to resize the screen, it only draw item to a control with there original size.</p>
-
-                    <p><b><li>Initializing the game and apply a background color</li></b></p>
-                    <p>Next step is to create an instance of our game engine "Manager" and for that, go to the code section, right clic on your main form and chose "View Code" or clic F7 shortcut.</p>
-                    <p>You need to add reference of MELHARFI library to you class</p>
-                    <p>
-                    <pre>
-                      <code class="csharp">
-using MELHARFI;
-using MELHARFI.Manager;
-                      </code>
-                    </pre>
-                    <p><img id="myImg8" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg8.PNG" alt="" width="462" height="340" onclick="ShowModalImage('myImg8')"></p>
-                    </p>
-                    <p>Assuming your game is basic and need only one instance of your game engine add this line in the Form1 class constuctor:</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-Manager manager = new Manager(this, "name_of_Instance_like_CORE_ENGINE");
-                        </code>
-                      </pre>
-                      <p><img id="myImg9" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg9.PNG" alt="" width="595" height="326" onclick="ShowModalImage('myImg9')"></p>
-                    </p>
-                    <p>The name given to the constructor give a meaning of the current instance, we'll cover its uility later.</p>
-                    <p>By default the background color is black, so if you compile your project you'll see a black window.</p>
-                    <p>To change the background color just add this line</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-manager.Background = Color.Blue;
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img id="myImg10" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg10.PNG" alt="" width="616" height="378" onclick="ShowModalImage('myImg10')"></p>
-                    <p>And just run your code to see a beautiful window</p>
-                    <p><img id="myImg11" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg11.PNG" alt="" onclick="ShowModalImage('myImg11')"></p>
-                    <p>If you experience some kind of Flickering of screen, it's an issue in GDI+ that you can resolve by adding that peace of code in top of your main form code just after InitializeComponent();</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
-this.Invalidate();
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img id="myImg12" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/2/createProjecrImg12.PNG" alt="" onclick="ShowModalImage('myImg12')"></p>
-                    </p>
-
-                    <p><b><li>FPS or Refresh Rate</li></b></p>
-                    <p>By default the rendering time to screen is refreshed 40 times per second, if by any reason you want to modify that variable, just add this line :</p>
+                    <p><b><h3>08. FillPolygon (shapes)</h3></b></p>
+                    <p><b>FillPolygon class</b></p>
+                    <p>FillPolygon is a shape that you can draw on the screen with a filled color inside.</p>
+                    <p><li>Parameters</li></p>
+                    <p><b>1- Brush </b> = color</p>
+                    <p><b>2- Point[]</b> Corners of the polygon</p>
+                    <p>The trick is that you have to define the location of each corner of polygone, if you have 3 corners, then it's a triangle, 4 corners is a rectangle and so on</p>
+                    <p>First we need to define a Point[] object that will store all corner's points, make attention that order  is important, the last point will be automatically linked with the first entry of the array point to complete the Polygon like this :</p>
                     <p>
                       <pre>
                         <code class="csharp">
 Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;                          
-manager.Fps = 60;
+manager.Background = Color.Blue;
+
+Point[] points = new Point[6];
+points[0] = new Point(100, 150);
+points[1] = new Point(150, 100);
+points[2] = new Point(300, 100);
+points[3] = new Point(350, 150);
+points[4] = new Point(300, 200);
+points[5] = new Point(150, 200);
                         </code>
                       </pre>
                     </p>
-                    <p>That Fps value make sure to update a timer interval inside the Manager game loop to refresh screen using the method <b>Manager.refreshTimer</b></p>
-                    <p>It's the same as doing :</p>
+                    <p><li>3- FillMode </li>describ the way the fill color will be applyed there's 2 options : FillMode.Alternate and FillMode.Winding</p>
+                    <p><b>FillMode.Alternate </b>FillPolygon can draw many sections, and those sections can be superposed, and when it's the case, the alternate mode will negate the filling purpose, meaning that if an area is filled, and another shape is going to be filled over an existed shape, the color that intersect with it well be voided (not colored).</p>
+                    <p>Here is a Link to better understand <a href="https://msdn.microsoft.com/en-us/library/system.drawing.drawing2d.fillmode(v=vs.110).aspx">link</a>.</p>
+                    <p><b>FillMode.Winfing </b>it's the default value, all the contente of the Polygon will be filled with the brush color.</p>
 
                     <p>
                       <pre>
                         <code class="csharp">
-manager.refreshTimer.Interval = Fps;
+Manager manager = new Manager(this, "CORE_ENGINE");
+manager.Background = Color.Blue;
+              
+Point[] points = new Point[6];
+points[0] = new Point(100, 150);
+points[1] = new Point(150, 100);
+points[2] = new Point(300, 100);
+points[3] = new Point(350, 150);
+points[4] = new Point(300, 200);
+points[5] = new Point(150, 200);
+              
+FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, manager);
+manager.BackgroundLayer.Add(fp);
                         </code>
                       </pre>
                     </p>
-                    <p>Please notice that the Manager is specialy used for dealing with graphic stuff.</p>
-                    <p>You can find many thing around rendering and so and you can discover this using intellisense</p>
-                    <button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html'">Next Chapter 02. Superposition and ZIndex>></button>
-
-
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygon.PNG"></p>
+                    <p><li>Second overload</li></p>
+                    <p>2 parameters are added <b>Border color and size</b></p>
+                    <p></p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, Color.Red, 3, manager);
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygonB.PNG"></p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-errorhandling.html'">Next Chapter 09. Error Handling>></button></p>
 
                   </div>
-
-
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
                 <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><b>>>01. Initializing MELHARFI engine</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html">02. Superposition and ZIndex</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-bmp.html">04. Bmp (Bitmap)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-rec.html">05. Rec (Rectangle)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-anim.html">06. Anim (Animation)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><b>>>08. FillPolygon (shapes)</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-errorhandling.html">09. Error handling</a></p>
                 <p>10. Mouse events</p>
                 <p>11. Controls and ControlLayer</p>
