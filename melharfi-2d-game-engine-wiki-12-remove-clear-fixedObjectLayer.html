@@ -86,21 +86,16 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
+                    <p><b><h3>12. Remove, Clean, FixedObjectLayer</h3></b></p>
+                    <p><b>Remove object</b></p>
+                    <p>When you want to remove an object from screen like an enemy or whatever object, you must remove it from the layer where it's stored.</p>
+                    <p>If it's a background object so you should look for it in <b>Manager.manager.GfxBgrList</b>, and so on for the other layers.</p>
+                    <p>Let's suppose you have made an object as follow</p>
 
-                    <p><b><h3>04. Bmp (Bitmap)</h3></b></p>
-                    <p><b>Bmp class</b></p>
-                    <p>To draw a picture "Bitmap" you should create an instance of Bmp class. This class has 20 overloads depending on what the parameters you want to initialize. The easy one is</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
-                        </code>
-                      </pre>
-                    </p>
-                    <p>And here is a complete code </p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using MELHARFI.Manager;
@@ -114,149 +109,239 @@ namespace _2dProject
         {
             InitializeComponent();
 
-            Manager manager = new Manager(this, "CORE_ENGINE");
-            manager.Background = Color.Blue;
-
-            Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
-            
-            manager.BackgroundLayer.Add(cloudPicture);
+            Manager manager = new Manager(this, "manager");
+            Bmp img1 = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(img1);
         }
     }
-}                          
-                        </code>
-                      </pre>
-                    </p>
-
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch3-cloud.png"></p>
-                    <p>Obiously you can chage the Position as you want</p>
-
-                    <p><b>ObjectLayer</b> Is the common asset like players, monsters... that come front of background (layer 2)</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
-manager.ObjectLayer.Add(superMario);
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch-sm.PNG"></p>
-
-                    <p>If you experiance some king of flickering of your form, you can go to Flickering chapter to fix this or add that code right in the top of your main function</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
-this.Invalidate();
-
-Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;
-
-Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);            
-manager.BackgroundLayer.Add(cloudPicture);
-
-Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
-manager.ObjectLayer.Add(superMario);
-                        </code>
-                      </pre>
-                    </p>
-
-
-                    <p><b>Bmp parameters.</b></p>
-                    <p><b>Name</b> : You can associate a name to an image object so that you can fetch for it if you want to, like so :</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-cloudPicture.name = "cloud1";
-                        </code>
-                      </pre>
-                    </p>
-
-                    <p><b>Opacity</b> : cloudPicture.Opacity = 0.5F; meaning that the picture is going to be transparent by 50%, min value is 0.0F (completely transparent) and 1F is 100% opaque.</p>
-                    <p><b>Rectanle</b> : let you draw only a peace of your picture depending on a start point and the size to take.</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-cloudPicture.rectangle = new Rectangle(new Point(50, 50), new Size(60, 70));
-                        </code>
-                      </pre>
-                    </p>
-
-                    <p>The picture rendered will croped, from the position 50 X, 50 Y of the original picture, and only a rectangle of 60 pixel width and 70 pixel height will be taken, the other pieces is ignored and not displayed.</p>
-                    <p><b>typeGfx</b> : to identify object as it's type if is it a background or Object or Top</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-cloudPicture.TypeGfx = Manager.TypeGfx.Bgr;
-//or
-cloudPicture.TypeGfx = Manager.TypeGfx.Obj;
-                        </code>
-                      </pre>
-                    </p>
-
-                    <p>Useful if somehow you don't know where an object is added, if is it in background or object, so by that value you know where it’s stored by fetching like so :</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-if(cloudPicture.TypeGfx == Manager.TypeGfx.Bgr)
-{
-  /*...*/
-}
-else if(cloudPicture.TypeGfx == Manager.TypeGfx.Obj)
-{
-  /*...*/
-}
-else
-{
-  /*...*/
 }
                         </code>
                       </pre>
                     </p>
-                    <p><b>Visible</b> : boolean property to make picture visible or not.</p>
-                    <p><b>Z-Index</b> : depth of an object inside a layer to superpose a picture over another one as integer.</p>
-                    <p><b>Crypted</b> : is a bool flag to determine if a picture is encrypted or not, if it's so, you need my CryptDecrypt tool share in the link:.</p>
-                    <p>https://github/MELHARFI/CryptDecrypt</p>
-                    <p>This flag is self initialized 'readonly' when you create your Bmp instance as you'll specify whether the picture is encrypted or not, so you don't need to initialize it as it's done in the constructor like :</p>
+
+                    <p>After some events you want to remove that object from the game you just need to do as follow : </p>
+                    <p>But the best way is add control programatically not by drag and drop, yet nothing stop you to do so.</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Manager manager = new Manager(this, "manager");
-manager.Background = Color.Blue;
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            Bmp img1 = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(img1);
+        }
+    }
+}
+
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>Pay attention that object img1 must be declared in the same scoop, im mean the code bellow is working : </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            Bmp img1 = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(img1);
+
+            manager.ObjectLayer.Remove(img1);
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    
+                    <p>The object is removed just after it's added, and it did work because the variable img is known cause we are in the same scope of block-code.</p>
+                    <p>What happen if you are out of that scope, like if you are in another class, then the object img1 is know recognized.</p>
+                    <p>The code bellow will rise an exception</p>
+
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            Bmp img1 = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(img1);
+            manager.ObjectLayer.Remove(img1);
+
+            deletePlayer(manager);
+        }
+
+        private void deletePlayer(Manager manager)
+        {
+            manager.ObjectLayer.Remove(img1); /// error in this line, cause it does not exist in the current context (out of its declaration scope)
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>And here is handy using of the <b>Name</b> property of an object, meaning with that you can look for it in the layer and then remove it by its name as follow :</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            Bmp img1 = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(img1);
+            manager.ObjectLayer.Remove(img1);
+
+            deletePlayer(manager);
+        }
+
+        private void deletePlayer(Manager manager)
+        {
+            manager.ObjectLayer.RemoveAll(f => f.Name == "supermario");
+            
+        }
+    }
+}
                           
-/*not encrypted Bmp*/
-Bmp NotEncryptedBMP = new Bmp("1.jpg", Point.Empty, manager);
-manager.BackgroundLayer.Add(NotEncryptedBMP);
-
-/*encrypted Bmp*/
-string key = "12345678";
-string iv = "87654321";
-Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
-manager.BackgroundLayer.Add(encryptedBMP);
                         </code>
                       </pre>
                     </p>
+                    <p>If you don't associate a name to an object then you can't remove it or deal with cause you lost your identification name.</p>
 
-                    <p>To encrypt a picture you must use the CryptDecrypt tool to encrypt it first using 2 Keys you must regenerate "Key & IV"</p>
-                    <p><li>>Key</li> is the first key must be exactly 8 characters as string, (any character, number, letters, special char ..)</p>
+                    <b><li>Cleaning Objects</li></b>
+                    <p>In case you want to clear all objects from screen depending on witch layer you want, you just use this:</p>
+                    <p><b>manager.BackgroundLayer.Clear();</b></p>
+                    <p><b>manager.ObjectLayer.Clear();</b></p>
+                    <p><b>manager.TopLayer.Clear();</b></p>
+                    <p>Otherwize if you want to clear all layers :</p>
+                    <p><b>manager.TopLayer.Clear();</b></p>
+                    <p><b>manager.Clear();</b></p>
+                    <p><b><li>FixedObjectLayer</li></b></p>
+                    <p>First let's talk about a situation could happen to you, because it was the case for me in my RPG game.</p>
+                    <p>Admitting that we have map full of objects and players ..., and you want your player to move to the other screen (next map),</p>
+                    <p>In that point of time you should clean the full screen of objects and players because you are moving to another map with its own object and different players.</p>
+                    <p>You do so you can use the 4 lines of codes shown before to clean the map, BUT what about some important stuff like your life point, you information, stats, hud ...</p>
+                    <p>These informations should not be removed and should remain fixed on the screen whatever you do unless if you use many instance of Game Engine, but assuming you use only one instance for all your stuff.</p>
+                    <p>Maybe you can use your own logic by checking every object and decide if you want to keep it or not, but it's going to need a lot of conditions and not really what we want cause we are lazy :)</p>
+                    <p>To escape that issue, i made another layer <b>FixedObjectLayer</b> to store every important object that you don't want to be removed.</p>
+                    <p>Let's add a text control a slife point that we want it to be as Fixed object </p>
 
-                    <p><li>IV</li> is the second key called "Initializing Vector" must be exactly 8 characters too as string, (any character, number, letters, special char ..)</p>
-                    <p>you can use the same string for both of them.</p>
-                    <p>After that you must replace your original picture by the one being encrypted and saved and then use the apropriate constructor :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            manager.Background = Color.CadetBlue;
+
+            Bmp supermario = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(supermario);
+
+            Txt lifePoints = new Txt("Life points : 5", new Point(0, 0), "lifePoint", Manager.TypeGfx.Top, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Black, manager);
+            manager.TopLayer.Add(lifePoints);
+            manager.FixedObjectLayer.Add(lifePoints);   // <-- fixing object
+        }
+    }
+}
+
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src = "repos/MELHARFI-2D-Game-Engine/assets/fixedObject.PNG"></p>
+                    <p>if we clean scrren using : </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            manager.Background = Color.CadetBlue;
+
+            Bmp supermario = new Bmp(@"supermario.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(supermario);
+
+            Txt lifePoints = new Txt("Life points : 5", new Point(0, 0), "lifePoint", Manager.TypeGfx.Top, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Black, manager);
+            manager.TopLayer.Add(lifePoints);
+            manager.FixedObjectLayer.Add(lifePoints);   // <-- fixing object
+            cleanScreen();
+        }
+
+        private void cleanScreen()
+        {
+            // catching manager in out of its declaration scope.
+            Manager manager = Manager.Managers.First(f => f.Name == "manager");
+            manager.Clear();
+        }
+    }
+}
                         </code>
                       </pre>
                     </p>
 
-                    <p><b>isSpriteSheet</b> boolean value indicating wheter the object "Bmp" must show only a piece of the original picture or the full image, this value is read only, and it's initialized when a constructor of Bmp is called with the rectangle parameter.</p>
-                    <p>quite useful when you want to check if a Bmp object is a sprite sheet or not.</p>
-                    <p><b>newColorMap</b> is a way to convert a color to another one, meaning that each pixel with the given color is found will be changed.</p>
-                    <p>More details is in the 19 Converting-color chapter</p>
-
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-05-rec.html'">Next Chapter 05. Rec>></button></p>
-
+                    <p><img src ="repos/MELHARFI-2D-Game-Engine/assets/fixedObject2.PNG"></p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-13-cryptography.html'">Next Chapter 13. Cryptography>></button></p>
                   </div>
                 </div>
               </div>
@@ -267,15 +352,15 @@ Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
                 <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
-                <p><b>>>04. Bmp (Bitmap)</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
+                <p><b>>>12. Remove,Clear and FixedObjectLayer</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
