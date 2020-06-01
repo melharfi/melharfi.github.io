@@ -86,59 +86,60 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>05. Rec (Rectangle)</h3></b></p>
-                    <p><b>Rec class</b></p>
-                    <p>Sometime you just need to draw a rectangle filled with a color inside, it's pretty useful to show a message, or for any reason and believe me you'll need it a lot of time.</p>
-                    <p>Let's take a look to the constructors.</p>
-                    <p>There’s 2 overloads, an empty one, and another one with 6 parameters (Brush, Point, Size, Name, TypeGfx, Visible)</p>
-                    <p><b>Brush </b> is the color of the rectangle</p>
-                    <p><b>Point</b></p>
-                    <p><b>Size</b></p>
-                    <p><b>Name</b></p>
-                    <p><b>TypeGfx</b></p>
-                    <p><b>Visible </b> : to identify object as it's type if is it a background or Object or Top</p>
+                    <p><b><h3>09. Error handling</h3></b></p>
+                    <p><b>Error Handling</b></p>
+                    <p>There's a code inside game loop "try catch" to prevent it from crash and then quite.</p>
+                    <p>To avoid crashing you can subscribe to an event handler withing a callback.</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Rec box1 = new Rec(Brushes.Red, new Point(100, 100), new Size(80, 80), "box1", Manager.TypeGfx.Background, true, manager);
-manager.BackgroundLayer.Add(box1);
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.Blue;
+            manager.OutputErrorCallBack = CatchError;
+
+        }
+
+        private void CatchError(string error)
+        {
+            // show notification for your error here or ignore it.
+        }
+    }
+}
                         </code>
                       </pre>
                     </p>
-
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch6-rec1.PNG"></p>
-                    <p>You can add a border of the rectangle.</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-Rec box1 = new Rec(Brushes.Red, new Point(100, 100), new Size(80, 80), "box1", Manager.TypeGfx.Background, true, manager);
-box1.BorderColor = Color.Black;
-box1.BorderWidth = 2;
-manager.BackgroundLayer.Add(box1);
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch6-rec2.PNG"></p>
-
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-anim.html'">Next Chapter 06. Anim>></button></p>
-
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-10-mouse-events.html'">Next Chapter 08. FillPolygon>></button></p>
                   </div>
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html">02. Superposition and ZIndex</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><b>>>05. Rec (Rectangle)</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-errorhandling.html">09. Error handling</a></p>
-                <p>10. Mouse events</p>
+                <p><b>>>Home</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><b>>>09. Error handling</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
                 <p>11. Controls and ControlLayer</p>
                 <p>12. Remove, Clean, FixedObjectLayer</p>
                 <p>13. Cryptography</p>

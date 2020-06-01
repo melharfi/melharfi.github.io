@@ -86,204 +86,194 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>06. Anim (Animation)</h3></b></p>
-                    <p><b>Anim class</b></p>
-                    <p>Ok, time to make some movement in our screen.</p>
-                    <p>An Anim object let you create an animation from many pictures, so the purpose is that you have many pictures stored somewhere and you will make them shown one by one.</p>
-                    <p><li>the anim object has 4 overloads, 2 for non encrypted assets and 2 for encrypted ones.</li></p>
+
+                    <p><b><h3>04. Bmp (Bitmap)</h3></b></p>
+                    <p><b>Bmp class</b></p>
+                    <p>To draw a picture "Bitmap" you should create an instance of Bmp class. This class has 20 overloads depending on what the parameters you want to initialize. The easy one is</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Anim anim1 = new Anim(manager);
-manager.BackgroundLayer.Add(anim1);
+Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
                         </code>
                       </pre>
                     </p>
-                    
-                    <p>You can specify Interval property in millisecond that each asset stay shown before switch to the next asset.</p>
-                    <p>There is two ways, eather use a <b>Interval</b> property of <b>anim1</b> object or use a constructor overload.</p>
+                    <p>And here is a complete code </p>
                     <p>
                       <pre>
                         <code class="csharp">
-Anim anim1 = new Anim(500, manager);
-manager.BackgroundLayer.Add(anim1);
-                        </code>
-                      </pre>
-                    </p>
-                    <p>Untill now or anim object is empty and does not store the assets sequances, so here is how to add some pictures</p>
-                    <p><b>anim1.AddCell()</b> with 13 overloads, let's see all params inside the constructor.</p>
-                    <p><b>Asset</b>  is a path of the picture</p>
-                    <p><b>id</b> is an int number to stack the picture piled one over the other</p>
-                    <p><b>PosX</b> X position</p>
-                    <p><b>PosY</b> Y position</p>
-                    <p><b>Width</b></p>
-                    <p><b>Height</b></p>
-                    <p><b>Opacity </b> float value, it's the transparency (0F = invisible, 0.5 = 50% half visible, 1F = visible/opaque 100%)</p>
-                    <p><b>interval </b> time the picture will remain on the screen.</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.AddCell(@"c:\asset1.png", 0, 0, 0); // first asset with id = 0, position x =0 & y =0
-anim1.AddCell(@"c:\asset2.png", 1, 0, 0); // second asset id = 2
-anim1.AddCell(@"c:\asset3.png", 2, 0, 0); // third asset id = 3
-                        </code>
-                      </pre>
-                    </p>
-                    <p>Next step is to initialize the object with ini() method that has 4 overloads</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.Ini(Manager.TypeGfx.Object, false);
-                        </code>
-                      </pre>
-                    </p>
-                    <p>I precise that event we know where to add our object into a specific drawing layer, we still need to store a reference for that information that the object itself know where it is.</p>
-                    <p>We do that with the first argument <b>Manager.typeGfx</b> in the constructor.</p>
-                    <p>Second argument is to precise if the picture is encrypted or not.</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.Ini(Manager.TypeGfx.Object, new Rectangle(new Point(0, 0), new Size(50, 60)), false);
-                        </code>
-                      </pre>
-                    </p>
-                    <p>This overload is intended to show a picture inside a picture.</p>
-                    <p>Have'nt you seen before a big picture with many stuff inside ?</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/naruto.png"></p>
-                    <p>We call this a <b>SpriteSheet</b></p>
-                    <p>Size is the size you want to take from the original picture, make attention that this overload is not used to show the original format of the picture as it is.</p>
-                    <p>It's handy when we define all assets inside one picture, and then we just need to crop our image from the original one to the specified rectangle and add it to the sequances.</p>
-                    <p>We will see how to use a single picture with many peace inside later.</p>
-                    <p><b>IMPORTANT</b>, Ini() method should be placed AFTER adding images with anim1.AddCell, not before, otherwise an exception will raise.</p>
-                    <p><li>Next we must add the object to the layer Manager.manager.GfxObjList.Add(anim1);</li></p>
-                    <p>And finally start the animation with 'anim1.Start();'</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.Ini(Manager.TypeGfx.Obj, "anim1");
+using System.Drawing;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.Blue;
+
+            Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);
+            
+            manager.BackgroundLayer.Add(cloudPicture);
+        }
+    }
+}                          
                         </code>
                       </pre>
                     </p>
 
-                    <p>Here is an example of 4 different pictures 'not a spriteSheet'</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/narutoPictureRange.PNG"></p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch3-cloud.png"></p>
+                    <p>Obiously you can chage the Position as you want</p>
+
+                    <p><b>ObjectLayer</b> Is the common asset like players, monsters... that come front of background (layer 2)</p>
                     <p>
                       <pre>
                         <code class="csharp">
+Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
+manager.ObjectLayer.Add(superMario);
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch-sm.PNG"></p>
+
+                    <p>If you experiance some king of flickering of your form, you can go to Flickering chapter to fix this or add that code right in the top of your main function</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+this.Invalidate();
+
 Manager manager = new Manager(this, "CORE_ENGINE");
 manager.Background = Color.Blue;
-Anim anim1 = new Anim(100, manager);
-anim1.AddCell("narutoStep1.png", 0, 100, 100);
-anim1.AddCell("narutoStep2.png", 1, 100, 100);
-anim1.AddCell("narutoStep3.png", 2, 100, 100);
-anim1.AddCell("narutoStep4.png", 3, 100, 100);
-anim1.Ini(Manager.TypeGfx.Object, "naruto", false);
-manager.ObjectLayer.Add(anim1);
-anim1.Start();
+
+Bmp cloudPicture = new Bmp("cloud.png", new Point(0,0), manager);            
+manager.BackgroundLayer.Add(cloudPicture);
+
+Bmp superMario = new Bmp("supermario.png", new Point(100, 100), manager);
+manager.ObjectLayer.Add(superMario);
                         </code>
                       </pre>
                     </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/narutoAnim.gif"></p>
-                    <p>Anim Class has many parameters like :</p>
-                    <p><b>AutoResetAnim </b>To play the animation only one time and keep showing last frame "no loop", if you want to hide the last frame, just combine this line with :</p>
+
+
+                    <p><b>Bmp parameters.</b></p>
+                    <p><b>Name</b> : You can associate a name to an image object so that you can fetch for it if you want to, like so :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-anim1.HideAtLastFrame = true;
+cloudPicture.name = "cloud1";
                         </code>
                       </pre>
                     </p>
-                    <p><b>AutoResetTimer </b>To stop playing the animation and showing the first frame.</p>
+
+                    <p><b>Opacity</b> : cloudPicture.Opacity = 0.5F; meaning that the picture is going to be transparent by 50%, min value is 0.0F (completely transparent) and 1F is 100% opaque.</p>
+                    <p><b>Rectanle</b> : let you draw only a peace of your picture depending on a start point and the size to take.</p>
                     <p>
                       <pre>
                         <code class="csharp">
-anim1.AutoResetTimer = false;
+cloudPicture.rectangle = new Rectangle(new Point(50, 50), new Size(60, 70));
                         </code>
                       </pre>
                     </p>
-                    <p>Stop playing animation in the last frame and hide it, notice that both command should combined</p>
+
+                    <p>The picture rendered will croped, from the position 50 X, 50 Y of the original picture, and only a rectangle of 60 pixel width and 70 pixel height will be taken, the other pieces is ignored and not displayed.</p>
+                    <p><b>typeGfx</b> : to identify object as it's type if is it a background or Object or Top</p>
                     <p>
                       <pre>
                         <code class="csharp">
-anim1.DestroyAfterLastFrame = true;
-anim1.AutoResetAnim = false;
+cloudPicture.TypeGfx = Manager.TypeGfx.Bgr;
+//or
+cloudPicture.TypeGfx = Manager.TypeGfx.Obj;
                         </code>
                       </pre>
                     </p>
-                    <p>Get the Number of current frame</p>
+
+                    <p>Useful if somehow you don't know where an object is added, if is it in background or object, so by that value you know where it’s stored by fetching like so :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-int currentFrame = anim1.counter;
+if(cloudPicture.TypeGfx == Manager.TypeGfx.Bgr)
+{
+  /*...*/
+}
+else if(cloudPicture.TypeGfx == Manager.TypeGfx.Obj)
+{
+  /*...*/
+}
+else
+{
+  /*...*/
+}
                         </code>
                       </pre>
                     </p>
-                    <p>Encrypting index for the image :</p>
+                    <p><b>Visible</b> : boolean property to make picture visible or not.</p>
+                    <p><b>Z-Index</b> : depth of an object inside a layer to superpose a picture over another one as integer.</p>
+                    <p><b>Crypted</b> : is a bool flag to determine if a picture is encrypted or not, if it's so, you need my CryptDecrypt tool share in the link:.</p>
+                    <p>https://github/MELHARFI/CryptDecrypt</p>
+                    <p>This flag is self initialized 'readonly' when you create your Bmp instance as you'll specify whether the picture is encrypted or not, so you don't need to initialize it as it's done in the constructor like :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-int encryptIndex = anim1.Crypt;
+Manager manager = new Manager(this, "manager");
+manager.Background = Color.Blue;
+                          
+/*not encrypted Bmp*/
+Bmp NotEncryptedBMP = new Bmp("1.jpg", Point.Empty, manager);
+manager.BackgroundLayer.Add(NotEncryptedBMP);
+
+/*encrypted Bmp*/
+string key = "12345678";
+string iv = "87654321";
+Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
+manager.BackgroundLayer.Add(encryptedBMP);
                         </code>
                       </pre>
                     </p>
-                    <p>Check if anim bitmaps are encrypted or not :</p>
+
+                    <p>To encrypt a picture you must use the CryptDecrypt tool to encrypt it first using 2 Keys you must regenerate "Key & IV"</p>
+                    <p><li>>Key</li> is the first key must be exactly 8 characters as string, (any character, number, letters, special char ..)</p>
+
+                    <p><li>IV</li> is the second key called "Initializing Vector" must be exactly 8 characters too as string, (any character, number, letters, special char ..)</p>
+                    <p>you can use the same string for both of them.</p>
+                    <p>After that you must replace your original picture by the one being encrypted and saved and then use the apropriate constructor :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-bool crypted = anim1.Crypted;
+Bmp encryptedBMP = new Bmp("1.jpg", Point.Empty, key, iv, manager);
                         </code>
                       </pre>
                     </p>
-                    <p>Pointer to the current Bmp frame:</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-Bmp currentFrame = anim1.img;
-                        </code>
-                      </pre>
-                    </p>
-                    <p>Modifying interval of changing image to make it fast or slower:</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.Interval = 50;
-                        </code>
-                      </pre>
-                    </p>
-                    <p>It's possible to give a point of each frame of the animation, but for some circumstances, you want that all frames use the same first point given, no matter what the frame has a different coordinate, it'll keep only the coordinate given to the first frame, this value can change during animation depending on logic using:</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.PointOfParent = true;
-                        </code>
-                      </pre>
-                    </p>
-                    <p>To show a reversed animation, i mean the frames will be started from a reversed order, using counter variable</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-anim1.Reverse = true;
-                        </code>
-                      </pre>
-                    </p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-txt.html'">Next Chapter 07. Txt>></button></p>
+
+                    <p><b>isSpriteSheet</b> boolean value indicating wheter the object "Bmp" must show only a piece of the original picture or the full image, this value is read only, and it's initialized when a constructor of Bmp is called with the rectangle parameter.</p>
+                    <p>quite useful when you want to check if a Bmp object is a sprite sheet or not.</p>
+                    <p><b>newColorMap</b> is a way to convert a color to another one, meaning that each pixel with the given color is found will be changed.</p>
+                    <p>More details is in the 19 Converting-color chapter</p>
+
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-drawing-05-rec.html'">Next Chapter 04. Rec>></button></p>
+
                   </div>
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-Superposition-and-ZIndex.html">02. Superposition and ZIndex</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-rec.html">05. Rec (Rectangle)</a></p>
-                <p><b>>>06. Anim (Animation)</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-errorhandling.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-mouseevent.html">10. Mouse event</a></p>
+                <p><b>>>Home</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
+                <p><b>>>04. Bmp (Bitmap)</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
                 <p>11. Controls and ControlLayer</p>
                 <p>12. Remove, Clean, FixedObjectLayer</p>
                 <p>13. Cryptography</p>

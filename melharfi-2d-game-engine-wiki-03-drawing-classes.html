@@ -87,75 +87,43 @@
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
 
-                    <p><b><h3>02. Superposition and ZIndex</h3></b></p>
-                    <p>Superposition of layers</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/3/logo2.png"></p>
-                    <p>For any 2D game, you should notice that there is background, content and top layer:</p>
-                    <p><b>BackgroundLayer</b>, is the color or a background picture, it could be many assets as the first layer and it stand in the back (layer 1)</p>
-                    <p><b>ObjectLayer</b> like players, monsters... that come front of background (layer 2)</p>
-                    <p><b>TopLayer</b>, like Hud, Chat box, Buttons... (front of content layer 3)</p>
-                    <p>The same thing is handled by this engine</p>
-                    <p><b>FixedObjectLayer</b> i add that layer to reference some object that i dont want them to be removed especially when cleaning screen, usefull when i want to redraw my screen or change it whitout touching some objects like hud which is static, that mean it's not a layer to draw objects but reference some object already drawn and not cosidered as a drawning layer therefore not superposed to the previouse layers.</p>
-                    <p><b>ControlLayer</b> in this layer we reference all Windows controls used like buttons, radio, checkbox, panel... it's necessary to reference them in case we want to hide a menu that thoses controls and we must keep a reference of them to ControlLayer to hide them or remove them, kkep in minde that those controls area always drawn in top even over TopLayer but excluded from superposition of other layers cause it store only Windows Controls not shapes.</p>
-                    <p>Thoses layers are displayed in superposition, the BackgroundLayer come first, and ObjectLayer came over the background, and TopLayer is always displayed on the Top.</p>
-                    <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/3/asset1.PNG" alt="" width="800" height="566" onclick="ShowModalImage('myImg1')"></p>
-                    <p>On each layer, you can add many item (image, shape) as you want.</p>
-                    <p>For background layer maybe you have a color background, cloud, building...</p>
-                    <p>For content layer you have your plane, and enemy planes that shoot you some missiles...</p>
-                    <p>And finally you have TopLayer to draw everything on the top like some messages, chat, hud ...</p>
-
-                    <p><b><li>Z-Index</li></b></p>
-                    <p>Another arranging step is the Z-Index</p>
-                    <p>To do that you have to use what we call a Z-INDEX parameter, it's the depth of the object inside the layer itself, like the 3rd coordinate "3D" but we are doing this in 2D gaming, some is calling that 2.5 D lol</p>
-                    <p>In each Layer as Background or Object or Top could have many objects inside, so you need a way to arange them to make some superposed over the others, like building over cloud.</p>
-                    <p>To achieve this let's say you have 3 background objects.</p>
-                    <p>Background_Color, cloud, building</p>
-                    <p>To order them with z-index you should make</p>
-                    <p>Background_Color z-index = 0;</p>
-                    <p>Cloud z-index = 1;</p>
-                    <p>Building z-index = 2;</p>
-                    <p>And you increment each time you want an object to be over another object.</p>
-                    <p>In coding, those layers are only a List of objects,</p>
-                    <p>Background layer is represented as <b>BackgroundLayer</b> (Graphics Background List).</p>
-                    <p>Object layer is represented as <b>ObjectLayer</b> (Graphics Object List).</p>
-                    <p>Top layer is represented as <b>TopLayer</b> (Graphics Top List)</p>
-                    <p>Other extra layers has been added for some issues that we are going to see later called like</p>
-                    <p><b>FixedObjectLayer</b></p>
-                    <p><b>ControlLayer</b></p>
-                    <p>And Z-index is coded line this :</p>
-                    <p>label1.zindex = 1;</p>
-                    <p>While the zindex is higher, more it's on the top.</p>
-                    <p>When creating an object without attributing a value to it's zindex, it's automatically attributed as the higher value to make it in the very top on the screen.
-                    <p>So you don't need to affect the Z-index to an object eache time as it's automatically incremented when a new object is created UNLESS if you want to make an object created at last be behind another object created from the begining, so in that case you should initialize the z-index of the last object to be less than the first one like
-                    </p>
+                    <p><b>Bitmap</b> , it show a picture in different format, like Bmp, Jpg, Pnj ...</p>
+                    <p><b>Rectanles</b>, drawing a square box colored or not.</p>
+                    <p><b>Animation</b>, showing a successive pictures.</p>
+                    <p><b>Text</b>, drawing text with font and color ...</p>
+                    <p><b>FillPolygon</b>, to draw shapes as a polygon</p>
+                    <p>Preference Visual studio 2017 or above, i am using 2019  frensh version for this tutorial.</p>
+                    <p>These classes will be explained in next chapters</p>
+                    <p>Remember that you have to add this line :</p>
+                    
                     <p>
-                      <pre>
-                        <code class="csharp">
-Bmp building = new (@"c:\building.jpg", new Point(0, 0), manager);
-Bmp cloud = new (@"c:\cloud.jpg", new Point(0, 0), manager);
-cloud.Zindex = building.Zndex - 1;
-                        </code>
-                      </pre>
-                    </p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-drawing-classes.html'">Next Chapter 03. Drawing Classes>></button></p>
+                    <pre>
+                      <code class="csharp">
+using static MELHARFI.Manager;
+                      </code>
+                    </pre>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-04-bmp.html'">Next Chapter 04. Bmp>></button></p>
+
 
                   </div>
+
+
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-Initializing-MELHARFI-engine.html">01. Initializing MELHARFI engine</a></p>
-                <p><b>>>02. Superposition and ZIndex</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-rec.html">05. Rec (Rectangle)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-errorhandling.html">09. Error handling</a></p>
-                <p>10. Mouse events</p>
+                <p><b>>>Home</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><b>>>03. Drawing classes</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
                 <p>11. Controls and ControlLayer</p>
                 <p>12. Remove, Clean, FixedObjectLayer</p>
                 <p>13. Cryptography</p>
