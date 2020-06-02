@@ -86,57 +86,14 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>10. Mouse events</h3></b></p>
-                    <p><b>Mouse Events</b></p>
-                    <p>Time to add some interactions with our objects.</p>
-                    <p>Each drawing class (Bmp,Anim,Rec,Txt) inherit from an <b>Interface</b> called IGfx, the particular job of this interface is to make all inherited classes got something in common, and guess what !! all those classes has same events and some stuff like Name, Tag, Visible, Z-Index but we are going to see only events right now</p>
-                    <p><li><b>MouseClic</b></li></p>
-                    <p><li><b>MouseDoubleClic</b></li></p>
-                    <p><li><b>MouseDown</b></li></p>
-                    <p><li><b>MouseUp</b></li></p>
-                    <p><li><b>MouseOver</b></li></p>
-                    <p><li><b>MouseMove</b></li></p>
-                    <p><li><b>MouseOut</b></li></p>
-                    <p>To bind an object to an event just follow your object name by <b>"".MouseClic +="</b> and then intellisense ask you if you want to auto generate a method using the "Tab" button.</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/eventMouseClic.png"></p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/cloudClick.png"></p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using MELHARFI.Manager;
-using MELHARFI.Manager.Gfx;
-
-namespace _2dProject
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-
-            Manager manager = new Manager(this, "CORE_ENGINE");
-            manager.Background = Color.Blue;
-
-            Bmp cloudPicture = new Bmp("cloud.png", new Point(0, 0), manager);
-            cloudPicture.MouseClic += CloudPicture_MouseClic;
-            manager.BackgroundLayer.Add(cloudPicture);
-
-        }
-
-        private void CloudPicture_MouseClic(Bmp bmp, MouseEventArgs e)
-        {
-            MessageBox.Show("Cloud has been clicked");
-        }
-    }
-}
-                        </code>
-                      </pre>
-                    </p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-11-controls.html'">Next Chapter 11. Controls and ControlLayer>></button></p>
-
+                    <p><b><h3>15. Interface Igfx</h3></b></p>
+                    <p>The graphic object <b>Bmp, Txt, Anim, Rec, Fillpolygon</b> inherit from IGfx interface and then they have some properties in common.</p>
+                    <p><b>Name</b> To identify object by its name.</p>
+                    <p><b>Tag</b> will be covered next chapter.</p>
+                    <p><b>Visible</b></p>
+                    <p><b>Zindex</b> superposition order.</p>
+                    
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-16-tag.html'">Next Chapter 16. Tag>></button></p>
                   </div>
                 </div>
               </div>
@@ -153,12 +110,12 @@ namespace _2dProject
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><b>>>10. Mouse events</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
+                <p><b>>>15. Interface IGfx</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-17-child.html">17. Child</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>

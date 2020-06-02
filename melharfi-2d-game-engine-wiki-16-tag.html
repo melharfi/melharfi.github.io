@@ -86,25 +86,15 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>10. Mouse events</h3></b></p>
-                    <p><b>Mouse Events</b></p>
-                    <p>Time to add some interactions with our objects.</p>
-                    <p>Each drawing class (Bmp,Anim,Rec,Txt) inherit from an <b>Interface</b> called IGfx, the particular job of this interface is to make all inherited classes got something in common, and guess what !! all those classes has same events and some stuff like Name, Tag, Visible, Z-Index but we are going to see only events right now</p>
-                    <p><li><b>MouseClic</b></li></p>
-                    <p><li><b>MouseDoubleClic</b></li></p>
-                    <p><li><b>MouseDown</b></li></p>
-                    <p><li><b>MouseUp</b></li></p>
-                    <p><li><b>MouseOver</b></li></p>
-                    <p><li><b>MouseMove</b></li></p>
-                    <p><li><b>MouseOut</b></li></p>
-                    <p>To bind an object to an event just follow your object name by <b>"".MouseClic +="</b> and then intellisense ask you if you want to auto generate a method using the "Tab" button.</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/eventMouseClic.png"></p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/cloudClick.png"></p>
+                    <p><b><h3>16. Tag</h3></b></p>
+                    <p>The Tag object is not something new in programming and i think you already know the purpose, if it's so just go next chapter, otherwise I’ll explain for someone who ignore that context.</p>
+                    <p>Assuming this code.</p>
                     <p>
                       <pre>
                         <code class="csharp">
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using MELHARFI.Manager;
 using MELHARFI.Manager.Gfx;
@@ -117,26 +107,97 @@ namespace _2dProject
         {
             InitializeComponent();
 
-            Manager manager = new Manager(this, "CORE_ENGINE");
+            Manager manager = new Manager(this, "manager");
             manager.Background = Color.Blue;
 
-            Bmp cloudPicture = new Bmp("cloud.png", new Point(0, 0), manager);
-            cloudPicture.MouseClic += CloudPicture_MouseClic;
-            manager.BackgroundLayer.Add(cloudPicture);
+            Bmp supermario = new Bmp(@"supermario.png", new Point(100, 0), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(supermario);
+
+            // new instance of stats class
+            Stats supermarioStats = new Stats();
+            supermarioStats.LifePoint = 5;
+            supermarioStats.Shield = 10;
 
         }
 
-        private void CloudPicture_MouseClic(Bmp bmp, MouseEventArgs e)
+        public class Stats
         {
-            MessageBox.Show("Cloud has been clicked");
+            public int LifePoint;
+            public int Shield;
         }
     }
 }
+                          
                         </code>
                       </pre>
                     </p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-11-controls.html'">Next Chapter 11. Controls and ControlLayer>></button></p>
 
+                    <p>And now let's say that you want to show the player's stats on the board  but for that you need to attach thoses stats to the player somehow, and gess what ?!! this is the job of the Tag object.</p>
+                    <p>Tag property is an object that you can associate to any object, including instance of any class that hold many information inside itself and we are going to use a Stats instace to attache it to the Tag object of the "supermario" object.</p>
+                    
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            manager.Background = Color.Blue;
+
+            Bmp supermario = new Bmp(@"supermario.png", new Point(100, 100), "supermario", Manager.TypeGfx.Object, true, manager);
+            manager.ObjectLayer.Add(supermario);
+
+            // new instance of stats class
+            Stats supermarioStats = new Stats();
+            supermarioStats.LifePoints = 5;
+            supermarioStats.Shield = 10;
+
+            // Link Stats instance to the Tag of the player
+            supermario.Tag = supermarioStats;
+
+            ShowStats();
+        }
+
+        private void ShowStats()
+        {
+            Manager manager = Manager.Managers.First(f => f.Name == "manager");
+            Stats playerStats = manager.ObjectLayer.First(f => f.Name == "supermario").Tag as Stats;
+
+            string lifePoints = "Life points : " + playerStats.LifePoints;
+            string shield = "Shield : " + playerStats.Shield;
+
+            Txt lifePointsTxt = new Txt(lifePoints, new Point(5, 5), "lifePointsTxt", Manager.TypeGfx.Top, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
+            manager.TopLayer.Add(lifePointsTxt);
+
+            Txt lifeShieldsTxt = new Txt(shield, new Point(5, 25), "shieldTxt", Manager.TypeGfx.Top, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
+            manager.TopLayer.Add(lifeShieldsTxt);
+        }
+
+        public class Stats
+        {
+            public int LifePoints;
+            public int Shield;
+        }
+    }
+}
+                          
+                        </code>
+                      </pre>
+                    </p>  
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/supermarioStats.PNG"></p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-17-child.html'">Next Chapter 17. Child>></button></p>
                   </div>
                 </div>
               </div>
@@ -153,13 +214,13 @@ namespace _2dProject
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><b>>>10. Mouse events</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
+                <p><b>>>16. Tag</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-17-child.html">17. Child</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-19-convertingColor.html">19. Converting color</a></p>
