@@ -86,91 +86,185 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>17. Child</h3></b></p>
-                    <p>Child is the ability to add graphic object inside thatobject itself, as a picture inside a picture will be then superposed, and to illustrate this let's say that there's a Rectangle object as a <b>Conteiner or parent</b> and inside of it there is a bunch of items <b>Child</b> like some informations as the lifepoints and Shield.</p>
-                    <p>The good thing to store objects inside another object is that you don't worry about moving them one by one as you have to move only the parent and the others will be moved depending on their relative position of the parent like a player moving and it's name above hime move same time.</p>
-                    <p>Assuming this code.</p>
+                    <p><b><h3>21. LidgrenNetwork</h3></b></p>
+                    <p><b><li>LidgrenNetwork network library</li></b></p>
+                    <p>LidgrenNetwork is a third party networking library that i include inside mainmy lib, and I tried many network lib, and I can say that LidgrenNetwork is the best, because of its Mit license and for stability.</p>
+                    <p>I am not going to make a full tutorial of LidgrenNetwork as he already did in his page:.</p>
+                    <p><a href="https://code.google.com/archive/p/lidgren-network-gen3/">Tuto.</a></p>
+                    <p><a src="https://github.com/lidgren/lidgren-network-gen3">Repo.</a></p>
+                    <p>I will just show you how to use it from my lib, if you already experience it. pay attention that i wrappe it inside my lib so the name space is changed to mine</p>
+                    <p>You need to add reference to <b>using MELHARFI.Lidgren.Network;</b></p>
+                    <p>Obiously there is a <b>Client</b> and a <b>Server</b></p>
+                    <b><li>Client</li></b>
                     <p>
                       <pre>
                         <code class="csharp">
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MELHARFI.Lidgren.Network;
+using System.Threading;
 using System.Windows.Forms;
-using MELHARFI.Manager;
-using MELHARFI.Manager.Gfx;
 
-namespace _2dProject
+namespace _2dProject.Network
 {
-    public partial class Form1 : Form
+    public class Client
     {
-        public Form1()
+        ///////////// Connnection socket////////////////
+        public static string host;
+        public static string ip;
+        public static int port;
+        /// ////////////////////////////////////////////
+
+        public static NetClient netClient;
+
+        static Client()
         {
-            InitializeComponent();
-
-            Manager manager = new Manager(this, "CORE_ENGINE");
-            manager.Background = Color.Blue;
-
-            Anim player = new Anim(150, manager);
-            player.AddCell("narutoStep1.png", 0, 0, 0);
-            player.AddCell("narutoStep2.png", 1, 0, 0);
-            player.AddCell("narutoStep3.png", 2, 0, 0);
-            player.AddCell("narutoStep4.png", 3, 0, 0);
-            player.Ini(Manager.TypeGfx.Object, "naruto", false);
-            player.Bmp.Point = new Point(100, 200);
-            manager.ObjectLayer.Add(player);
-            player.PointOfParent = true;            // necessary to not depend on relativ position of offsets
-            
-            // new instance of stats class
-            Stats playerStats = new Stats();
-            playerStats.Name = "Naruto";
-            playerStats.LifePoints = 5;
-
-            // Link Stats instance to the Tag of the player
-            player.Tag = playerStats;
-
-            Txt playerName = new Txt(playerStats.Name, new Point(0, -40), "playerName", Manager.TypeGfx.Object, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
-            player.Childs.Add(playerName);
-
-            Txt playerLifePoints = new Txt(playerStats.LifePoints.ToString(), new Point(0, -25), "playerLifePoints", Manager.TypeGfx.Object, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
-            player.Childs.Add(playerLifePoints);
-
-            KeyDown += Form1_KeyDown;
-            KeyUp += Form1_KeyUp;
+            NetPeerConfiguration config = new NetPeerConfiguration("the-morpher");
+            config.AutoFlushSendQueue = false;
+            config.PingInterval = 1F;
+            config.ConnectionTimeout = 10;
+            netClient = new NetClient(config);
+            netClient.RegisterReceivedCallback(new SendOrPostCallback(GotMessage));
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        public static void Connect(string host, int port)
         {
-            Manager manager = Manager.Managers.First(f => f.Name == "CORE_ENGINE");
-            Anim player = manager.ObjectLayer.First(f => f.Name == "naruto") as Anim;
+            netClient.Start();
+            NetOutgoingMessage hail = netClient.CreateMessage("Try to connect");
+            netClient.Connect(host, port, hail);
+        }
+        public static void GotMessage(object peer)
+        {
+            NetIncomingMessage im;
+            while ((im = netClient.ReadMessage()) != null)
+            {
+                switch (im.MessageType)
+                {
+                    case NetIncomingMessageType.DebugMessage:
+                    case NetIncomingMessageType.ErrorMessage:
+                    case NetIncomingMessageType.WarningMessage:
+                    case NetIncomingMessageType.VerboseDebugMessage:
+                    case NetIncomingMessageType.StatusChanged:
+                        NetConnectionStatus status = (NetConnectionStatus)im.ReadByte();
 
-            player.Stop();
+                        if (status == NetConnectionStatus.Connected)
+                            client_Connected();
+                        else if (status == NetConnectionStatus.Disconnected)
+                        {
+                            string reason = im.ReadString();
+                            client_Disconnected(reason);
+                        }
+                        break;
+                    case NetIncomingMessageType.Data:
+                        string data = im.ReadString();
+                        // Data received and stored in data variable
+                        break;
+                    default:
+                        MessageBox.Show("Unhandled type: " + im.MessageType + " " + im.LengthBytes + " bytes");
+                        break;
+                }
+            }
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private static void client_Connected()
         {
-            Manager manager = Manager.Managers.First(f => f.Name == "CORE_ENGINE");
-            Anim player = manager.ObjectLayer.First(f => f.Name == "naruto") as Anim;
-
-            if (player.AnimState == Anim.State.STOPED)
-                player.Start();
-
-            player.Point = new Point(player.Point.X + 5, player.Point.Y);
+            // new client connected
+        }
+        static void client_Disconnected(string reason)
+        {
+            // a client is disconnected
         }
 
-        public class Stats
+        public static void SendMessage(string msg)
         {
-            public string Name;
-            public int LifePoints;
+            NetOutgoingMessage om = netClient.CreateMessage(msg);
+            netClient.SendMessage(om, NetDeliveryMethod.ReliableOrdered);
+            netClient.FlushSendQueue();
         }
     }
 }
-</code>
-</pre>
-</p>
+                        </code>
+                      </pre>
+                    </p>
+                    <p><b><li>Server</li></b></p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using MELHARFI.Lidgren.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/narutoMoving.gif"></p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-18-sprite-sheet.html'">Next Chapter 18. Sprite Sheet>></button></p>
+namespace _2dProject.Network
+{
+  public class Server
+  {
+    public NetServer netServer;
+    NetPeerConfiguration config = new NetPeerConfiguration("the-morpher");
+    public Int32 Port = 7070;
+
+        public Server()
+        {
+      config.Port = Port;
+      netServer = new NetServer(config);
+      netServer.Start();
+
+            while (!Console.KeyAvailable)
+            {
+                NetIncomingMessage im;
+                while ((im = netServer.ReadMessage()) != null)
+                {
+                    // handle incoming message
+                    switch (im.MessageType)
+                    {
+                        case NetIncomingMessageType.DebugMessage:
+                        //Console.WriteLine(im.ReadString());
+                        //break;
+                        case NetIncomingMessageType.ErrorMessage:
+                        //Console.WriteLine(im.ReadString());
+                        //break;
+                        case NetIncomingMessageType.WarningMessage:
+                        //Console.WriteLine(im.ReadString());
+                        //break;
+                        case NetIncomingMessageType.VerboseDebugMessage:
+                        //Console.WriteLine(im.ReadString());
+                        //break;
+                        case NetIncomingMessageType.StatusChanged:
+                            try
+                            {
+                                string reason = im.ReadString();
+                                
+                            }
+                            catch
+                            {
+                                //Console.WriteLine (ex.ToString ());
+                            }
+                            break;
+                        case NetIncomingMessageType.Data:
+                            string receivedData = im.ReadString();
+                            break;
+                        default:
+                            Console.WriteLine("Unhandled type: " + im.MessageType + " " + im.LengthBytes + " bytes " + im.DeliveryMethod + "|" + im.SequenceChannel);
+                            break;
+                    }
+                }
+            }
+        }
+
+    
+  }
+}
+                        </code>
+                      </pre>
+                    </p> 
+
+                    
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-22-drawing-surface.html'">Next Chapter 22. Drawing Surface>></button></p>
                   </div>
                 </div>
               </div>
@@ -182,24 +276,24 @@ namespace _2dProject
                 <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-05-rec.html">05. Rec (Rectangle)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
-                <p><b>>>16. Tag</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-17-child.html">17. Child</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-17-childs.html">17. Childs</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-20-astar.html">20. AStar pathfinding</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-21-astar.html">21. LidgrenNetwork</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-22-drawing-surface.html">22. Drawing Surface</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-21-lidgren.html">21. LidgrenNetwork</a></p>
+                <p><b>>>22. Drawing Surface</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-23-flickering.html">23. Flickering issue</a></p>
               </div>
               <!----End Summary---->
