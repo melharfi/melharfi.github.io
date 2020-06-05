@@ -86,68 +86,205 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>08. FillPolygon (shapes)</h3></b></p>
-                    <p><b>FillPolygon class</b></p>
-                    <p>FillPolygon is a shape that you can draw on the screen with a filled color inside.</p>
-                    <p><li>Parameters</li></p>
-                    <p><b>1- Brush </b> = color</p>
-                    <p><b>2- Point[]</b> Corners of the polygon</p>
-                    <p>The trick is that you have to define the location of each corner of polygone, if you have 3 corners, then it's a triangle, 4 corners is a rectangle and so on</p>
-                    <p>First we need to define a Point[] object that will store all corner's points, make attention that order  is important, the last point will be automatically linked with the first entry of the array point to complete the Polygon like this :</p>
+                    <p><b><h3>19. Converting color</h3></b></p>
+                    <p><b><li>GetPixel()</li></b></p>
+                    <p>This method let you pick a color from all your screen by a given point represented as X and Y value :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;
-
-Point[] points = new Point[6];
-points[0] = new Point(100, 150);
-points[1] = new Point(150, 100);
-points[2] = new Point(300, 100);
-points[3] = new Point(350, 150);
-points[4] = new Point(300, 200);
-points[5] = new Point(150, 200);
+Color color1 = manager.GetPixel(10, 10);
                         </code>
                       </pre>
                     </p>
-                    <p><li>3- FillMode </li>describ the way the fill color will be applyed there's 2 options : FillMode.Alternate and FillMode.Winding</p>
-                    <p><b>FillMode.Alternate </b>FillPolygon can draw many sections, and those sections can be superposed, and when it's the case, the alternate mode will negate the filling purpose, meaning that if an area is filled, and another shape is going to be filled over an existed shape, the color that intersect with it well be voided (not colored).</p>
-                    <p>Here is a Link to better understand <a href="https://msdn.microsoft.com/en-us/library/system.drawing.drawing2d.fillmode(v=vs.110).aspx">link</a>.</p>
-                    <p><b>FillMode.Winfing </b>it's the default value, all the contente of the Polygon will be filled with the brush color.</p>
+                    <p><b><li>NewColorMap</li></b></p>
+                    <p>NewColorMap is a ColorMap object its particular job is to replace all pixels of a specific color on a picture by another color, useful if you want to paint your players by another color, for example changing the color of his eyes, his hair, skin ...</p>
+                    <p>You have to make sure that the color to be changed is present only in the area you want, assuming the color of the eyes of your player is blue and his shoulder is also blue, then if you change the blue color to another one it's going to be done to his shoulders too. in that case you need to make the color of his eyes unique and not present somewhere else.</p>
+                    <p>To demonstrate this let’s take an example.</p>
+                    <p>So this is the original picture</p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/narutoStep1.png"></p>
+                    <p>And we want to change his pant's color, then We need to pick a color from its pant this</p>
+                    <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/narutoPickColorFromPant1.png" alt="" onclick="ShowModalImage('myImg1')" width="800" height="437"></p>
+                    <p>So the old value is </p>
+                    <p><b>Red = 248</b></p>
+                    <p><b>Green = 144</b></p>
+                    <p><b>Blue = 8</b></p>
+                    <p>To a new color, and to find your RGB color you just need to use same tool "Photoshop" the ColorPicker</p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/newColor.PNG"></p>
+                    <p><b>Red = 37</b></p>
+                    <p><b>Green = 97</b></p>
+                    <p><b>Blue = 219</b></p>
+                    <p>Now you got the RGB colors we can convert it.</p>
+                    
 
                     <p>
                       <pre>
                         <code class="csharp">
-Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;
-              
-Point[] points = new Point[6];
-points[0] = new Point(100, 150);
-points[1] = new Point(150, 100);
-points[2] = new Point(300, 100);
-points[3] = new Point(350, 150);
-points[4] = new Point(300, 200);
-points[5] = new Point(150, 200);
-              
-FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, manager);
-manager.BackgroundLayer.Add(fp);
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Speech.Recognition;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+using static MELHARFI.Manager.SpriteSheet;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public static SpriteSheetData SSD = new SpriteSheetData();
+        SpriteSheet spriteSheet = new SpriteSheet();
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.WhiteSmoke;
+
+            Bmp naruto = new Bmp(@"narutoStep1.png", new Point(100, 100), "naruto", Manager.TypeGfx.Object, true, manager);
+
+            // determine how many instances of converting color we are using, ColorMap[1] mean only 1 color will be converted
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[1];
+
+            // calling the constructor of ColorMap for initialization
+            naruto.NewColorMap[0] = new System.Drawing.Imaging.ColorMap();
+
+            // OldColor is the color to be replaced, you need to use a paint tool to pick the color value like photoshop
+            naruto.NewColorMap[0].OldColor = Color.FromArgb(248, 144, 8);
+
+            // replacing the OldColor "red" by the color Blue
+            naruto.NewColorMap[0].NewColor = Color.FromArgb(37, 97, 219);
+
+            manager.ObjectLayer.Add(naruto);
+        }
+
+
+    }
+}                         
                         </code>
                       </pre>
                     </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygon.PNG"></p>
-                    <p><li>Second overload</li></p>
-                    <p>2 parameters are added <b>Border color and size</b></p>
-                    <p></p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/coloredPart1.png"></p>
+                    <p>It's a zoomed picture, so you can see that even his hair has been painted  too because it has some of the same color we want to change.</p>
+                    <p>So i'll not make shour to handle this issue because i told you how to "by coloring your player's parts whith unic colors" but we will talk about another issue.</p>
+                    <p>If you look closely you see that not all of his pant has been colored, because there's a graduation of color of the one we changed, so you need to pick that color too and change it depending on the gradutation you want.</p>
+                    <p>So what we want is that we need to change many colors of that player and we dont need to reproduce the code above, but just add the others colors to the <b>ColorMap</b> as bellow </p>
                     <p>
                       <pre>
                         <code class="csharp">
-FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, Color.Red, 3, manager);
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Speech.Recognition;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+using static MELHARFI.Manager.SpriteSheet;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public static SpriteSheetData SSD = new SpriteSheetData();
+        SpriteSheet spriteSheet = new SpriteSheet();
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.WhiteSmoke;
+
+            Bmp naruto = new Bmp(@"narutoStep1.png", new Point(100, 100), "naruto", Manager.TypeGfx.Object, true, manager);
+
+            // determine how many instances of converting color we are using, ColorMap[1] mean only 1 color will be converted
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[1];        // first color to be changed
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[2];        // second one
+
+            // calling the constructor of ColorMap for initialization
+            naruto.NewColorMap[0] = new System.Drawing.Imaging.ColorMap();
+            naruto.NewColorMap[1] = new System.Drawing.Imaging.ColorMap();
+
+
+            // OldColor is the color to be replaced, you need to use a paint tool to pick the color value like photoshop
+            naruto.NewColorMap[0].OldColor = Color.FromArgb(248, 144, 8);
+            naruto.NewColorMap[1].OldColor = Color.FromArgb(192, 56, 0);
+
+            // replacing the OldColor "red" by the color Blue
+            naruto.NewColorMap[0].NewColor = Color.FromArgb(37, 97, 219);
+            naruto.NewColorMap[1].NewColor = Color.FromArgb(29, 73, 161);
+
+            manager.ObjectLayer.Add(naruto);
+        }
+
+
+    }
+}
+
                         </code>
                       </pre>
                     </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygonB.PNG"></p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-09-error.html'">Next Chapter 09. Error Handling>></button></p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/coloredPart2.png"></p>
+                    <p>Huum it's look's like there's a third color to be convertted to in the edge of the pant, let's add the third one then : </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Speech.Recognition;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+using static MELHARFI.Manager.SpriteSheet;
 
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public static SpriteSheetData SSD = new SpriteSheetData();
+        SpriteSheet spriteSheet = new SpriteSheet();
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.WhiteSmoke;
+
+            Bmp naruto = new Bmp(@"narutoStep1.png", new Point(100, 100), "naruto", Manager.TypeGfx.Object, true, manager);
+
+            // determine how many instances of converting color we are using, ColorMap[1] mean only 1 color will be converted
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[1];        // first color to be changed
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[2];        // second one
+            naruto.NewColorMap = new System.Drawing.Imaging.ColorMap[3];        // third one
+
+
+            // calling the constructor of ColorMap for initialization
+            naruto.NewColorMap[0] = new System.Drawing.Imaging.ColorMap();
+            naruto.NewColorMap[1] = new System.Drawing.Imaging.ColorMap();
+            naruto.NewColorMap[2] = new System.Drawing.Imaging.ColorMap();
+
+
+            // OldColor is the color to be replaced, you need to use a paint tool to pick the color value like photoshop
+            naruto.NewColorMap[0].OldColor = Color.FromArgb(248, 144, 8);
+            naruto.NewColorMap[1].OldColor = Color.FromArgb(192, 56, 0);
+            naruto.NewColorMap[2].OldColor = Color.FromArgb(128, 24, 0);
+
+            // replacing the OldColor "red" by the color Blue
+            naruto.NewColorMap[0].NewColor = Color.FromArgb(37, 97, 219);
+            naruto.NewColorMap[1].NewColor = Color.FromArgb(29, 73, 161);
+            naruto.NewColorMap[1].NewColor = Color.FromArgb(21, 45, 94);
+
+            manager.ObjectLayer.Add(naruto);
+        }
+
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/coloredPart3.png"></p>
+                    <p>This is a zoomed picture and in fact we can see that some space remain white and need's to be rechecked but i think you got the point.</p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-20-astar.html'">Next Chapter 20. AStar Pathfinding>></button></p>
                   </div>
                 </div>
               </div>
@@ -162,17 +299,17 @@ FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, 
                 <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
-                <p><b>>>08. FillPolygon (shapes)</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-17-child.html">17. Child</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
+                <p><b>>>18. Sprite Sheet</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-20-astar.html">20. AStar pathfinding</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-21-astar.html">21. LidgrenNetwork</a></p>

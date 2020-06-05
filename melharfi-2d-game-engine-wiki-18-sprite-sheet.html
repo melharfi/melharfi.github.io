@@ -86,68 +86,163 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>08. FillPolygon (shapes)</h3></b></p>
-                    <p><b>FillPolygon class</b></p>
-                    <p>FillPolygon is a shape that you can draw on the screen with a filled color inside.</p>
-                    <p><li>Parameters</li></p>
-                    <p><b>1- Brush </b> = color</p>
-                    <p><b>2- Point[]</b> Corners of the polygon</p>
-                    <p>The trick is that you have to define the location of each corner of polygone, if you have 3 corners, then it's a triangle, 4 corners is a rectangle and so on</p>
-                    <p>First we need to define a Point[] object that will store all corner's points, make attention that order  is important, the last point will be automatically linked with the first entry of the array point to complete the Polygon like this :</p>
+                    <p><b><h3>18. SpriteSheet</h3></b></p>
+                    <p>Sprite Sheet is a picture that contain many peace of small graphics inside all drawn in the same file.</p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/naruto.png">&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/choji.png"></p>
+                    <p><img src="https://i.imgur.com/p3wyMEM.png"></p>
+                    <p>The purpose for that is when you want to show a person walking, the old way is to store each frame as a single picture, and switch them one by one as we have seen in th chapter 06-Anim.
+                    <p>The inconvenient is that you must create many files, they'll took more spaces.</p>
+                    <p>It's not meant to be used only for an animation instance, but you still can merge all assets in one single file depending on the context, and then you pick only what you want using the <b>Rectangle position</b>.</p>
+                    <p>To merge them you need to use a third party designing program as photoshop or specialy one for sprites, but you need to get the coordinates of each frame and store them somewhere to make sure you get the right frame you are looking for when you call it.</p>
+                    <p><li><b>Finding the coordinates with "Dark Function"</li></b></p>
+                    <p>I have found a handy tool that give me exactly what i want, Coordinate X, Y and Size width and Hight, and it can even merge many files into one sprite for you.</p>
+                    <p>This tool is called "Dark Function" it's a Java application therefore you need to have a Java runtime on your computer, <a href="http://darkfunction.com/editor/">Link</a>.</p>
+                    <p>It has the ability to auto detect a form and then you dont need select a rectangle yourself.</p>
+                    <p>When you open your SpriteSheet, just double click inside the picture you want, and Dark Function well surround it with a delimited square, regrouping all pixels he found and stop when he no lounger find anything around.</p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/darkFunction.PNG"></p>
                     <p>
                       <pre>
                         <code class="csharp">
-Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Speech.Recognition;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
 
-Point[] points = new Point[6];
-points[0] = new Point(100, 150);
-points[1] = new Point(150, 100);
-points[2] = new Point(300, 100);
-points[3] = new Point(350, 150);
-points[4] = new Point(300, 200);
-points[5] = new Point(150, 200);
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.Blue;
+
+            Rectangle rec1 = new Rectangle(new Point(0, 0), new Size(25, 53));
+            Bmp parent = new Bmp(@"sprite.png", new Point(100, 100), rec1, manager);
+            manager.ObjectLayer.Add(parent);
+        }
+    }
+}
                         </code>
                       </pre>
                     </p>
-                    <p><li>3- FillMode </li>describ the way the fill color will be applyed there's 2 options : FillMode.Alternate and FillMode.Winding</p>
-                    <p><b>FillMode.Alternate </b>FillPolygon can draw many sections, and those sections can be superposed, and when it's the case, the alternate mode will negate the filling purpose, meaning that if an area is filled, and another shape is going to be filled over an existed shape, the color that intersect with it well be voided (not colored).</p>
-                    <p>Here is a Link to better understand <a href="https://msdn.microsoft.com/en-us/library/system.drawing.drawing2d.fillmode(v=vs.110).aspx">link</a>.</p>
-                    <p><b>FillMode.Winfing </b>it's the default value, all the contente of the Polygon will be filled with the brush color.</p>
+                    <p><img src="img14.PNG"></p>
+                    <p>Or use a specific overload of Bmp class : </p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Speech.Recognition;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "CORE_ENGINE");
+            manager.Background = Color.Blue;
+
+            Bmp parent = new Bmp(@"sprite.png", new Point(100, 100), new Rectangle(new Point(0, 0), new Size(25, 57)), manager);
+            manager.ObjectLayer.Add(parent);
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+
+                    <p>Now you have to find a way where to record the rectangle of each offset somewhere, you can achieve that with a function that store thoses informations in a list <b>OR</b> use a the 2 functions i just add for that purpose.</p>
+                    <p><b><li>GetSpriteSheet & SetSpriteSheet</li></b></p>
+                    <p><b>SetSpriteSheet </b> to push an offset's rectangle.</p>
+                    <p><b>GetSpriteSheet </b> to pop up an offset's rectangle.</p>
+                    
 
                     <p>
                       <pre>
                         <code class="csharp">
-Manager manager = new Manager(this, "CORE_ENGINE");
-manager.Background = Color.Blue;
-              
-Point[] points = new Point[6];
-points[0] = new Point(100, 150);
-points[1] = new Point(150, 100);
-points[2] = new Point(300, 100);
-points[3] = new Point(350, 150);
-points[4] = new Point(300, 200);
-points[5] = new Point(150, 200);
-              
-FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, manager);
-manager.BackgroundLayer.Add(fp);
+                          using System;
+                          using System.Drawing;
+                          using System.Linq;
+                          using System.Speech.Recognition;
+                          using System.Windows.Forms;
+                          using MELHARFI.Manager;
+                          using MELHARFI.Manager.Gfx;
+                          using static MELHARFI.Manager.SpriteSheet;
+                          
+                          namespace _2dProject
+                          {
+                              public partial class Form1 : Form
+                              {
+                                  public static SpriteSheetData SSD = new SpriteSheetData();
+                                  SpriteSheet spriteSheet = new SpriteSheet();
+                                  public Form1()
+                                  {
+                                      InitializeComponent();
+                                      Run();
+                          
+                                      Manager manager = new Manager(this, "CORE_ENGINE");
+                                      manager.Background = Color.Blue;
+                          
+                                      Anim anim1 = new Anim(1, manager);
+                                      anim1.AddCell("sprite.png", 0, 0, 0, spriteSheet.GetSpriteSheet("naruto", 0));
+                                      anim1.AddCell("sprite.png", 1, 0, 0, spriteSheet.GetSpriteSheet("naruto", 1));
+                                      anim1.AddCell("sprite.png", 2, 0, 0, spriteSheet.GetSpriteSheet("naruto", 2));
+                                      anim1.AddCell("sprite.png", 3, 0, 0, spriteSheet.GetSpriteSheet("naruto", 3));
+                                      anim1.Ini(Manager.TypeGfx.Object, false);
+                                      anim1.Start();
+                                      manager.ObjectLayer.Add(anim1);
+                                  }
+                          
+                                  public void Run()
+                                  {
+                                      #region /////////// classe 1 Naruto 
+                                      // direction right
+                                      spriteSheet.SetSpriteSheet("naruto", 0, new Rectangle(new Point(0, 0), new Size(25, 53)));
+                                      spriteSheet.SetSpriteSheet("naruto", 1, new Rectangle(new Point(33, 0), new Size(23, 54)));
+                                      spriteSheet.SetSpriteSheet("naruto", 2, new Rectangle(new Point(66, 0), new Size(23, 53)));
+                                      spriteSheet.SetSpriteSheet("naruto", 3, new Rectangle(new Point(99, 0), new Size(23, 54)));
+                          
+                                      // direction left
+                                      spriteSheet.SetSpriteSheet("naruto", 4, new Rectangle(new Point(4, 57), new Size(18, 56)));
+                                      spriteSheet.SetSpriteSheet("naruto", 5, new Rectangle(new Point(35, 59), new Size(21, 54)));
+                                      spriteSheet.SetSpriteSheet("naruto", 6, new Rectangle(new Point(69, 58), new Size(18, 55)));
+                                      spriteSheet.SetSpriteSheet("naruto", 7, new Rectangle(new Point(99, 59), new Size(21, 54)));
+                          
+                                      // direction up
+                                      spriteSheet.SetSpriteSheet("naruto", 8, new Rectangle(new Point(4, 119), new Size(18, 56)));
+                                      spriteSheet.SetSpriteSheet("naruto", 9, new Rectangle(new Point(35, 121), new Size(21, 54)));
+                                      spriteSheet.SetSpriteSheet("naruto", 10, new Rectangle(new Point(68, 120), new Size(18, 55)));
+                                      spriteSheet.SetSpriteSheet("naruto", 11, new Rectangle(new Point(99, 121), new Size(21, 54)));
+                          
+                                      //direction down
+                                      spriteSheet.SetSpriteSheet("naruto", 12, new Rectangle(new Point(1, 183), new Size(25, 53)));
+                                      spriteSheet.SetSpriteSheet("naruto", 13, new Rectangle(new Point(35, 184), new Size(22, 52)));
+                                      spriteSheet.SetSpriteSheet("naruto", 14, new Rectangle(new Point(66, 183), new Size(23, 53)));
+                                      spriteSheet.SetSpriteSheet("naruto", 15, new Rectangle(new Point(98, 184), new Size(22, 52)));
+                                      #endregion
+                          
+                          
+                                  }
+                              }
+                          }
+                          
                         </code>
                       </pre>
                     </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygon.PNG"></p>
-                    <p><li>Second overload</li></p>
-                    <p>2 parameters are added <b>Border color and size</b></p>
-                    <p></p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, "fp", true, System.Drawing.Drawing2D.FillMode.Winding, Color.Red, 3, manager);
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/fillpolygonB.PNG"></p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-09-error.html'">Next Chapter 09. Error Handling>></button></p>
-
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-19-converting-color.html'">Next Chapter 18. Sprite Sheet>></button></p>
                   </div>
                 </div>
               </div>
@@ -162,17 +257,17 @@ FillPolygon fp = new FillPolygon(Brushes.Green, points, Manager.TypeGfx.Object, 
                 <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
-                <p><b>>>08. FillPolygon (shapes)</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
+                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</b></p>
+                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
                 <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-17-child.html">17. Child</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
+                <p><b>>>18. Sprite Sheet</b></p>
                 <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-20-astar.html">20. AStar pathfinding</a></p>
                 <p><a href="melharfi-2d-game-engine-wiki-21-astar.html">21. LidgrenNetwork</a></p>
