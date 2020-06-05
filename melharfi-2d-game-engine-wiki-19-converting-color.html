@@ -158,7 +158,7 @@ namespace _2dProject
                     <p><img src="repos/MELHARFI-2D-Game-Engine/assets/coloredPart1.png"></p>
                     <p>It's a zoomed picture, so you can see that even his hair has been painted  too because it has some of the same color we want to change.</p>
                     <p>So i'll not make shour to handle this issue because i told you how to "by coloring your player's parts whith unic colors" but we will talk about another issue.</p>
-                    <p>If you look closely you see that not all of his pant has been colored, because there's a graduation of color of the one we changed, so you need to pick that color too and change it depending on the gradutation you want.</p>
+                    <p>If you look closely you see that not all of his pant has been colored, because there's a gradient of color of the one we changed, so you need to pick that color too and change it depending on the gradient you want.</p>
                     <p>So what we want is that we need to change many colors of that player and we dont need to reproduce the code above, but just add the others colors to the <b>ColorMap</b> as bellow </p>
                     <p>
                       <pre>
@@ -263,18 +263,20 @@ namespace _2dProject
             // replacing the OldColor "red" by the color Blue
             naruto.NewColorMap[0].NewColor = Color.FromArgb(37, 97, 219);
             naruto.NewColorMap[1].NewColor = Color.FromArgb(29, 73, 161);
-            naruto.NewColorMap[1].NewColor = Color.FromArgb(21, 45, 94);
+            naruto.NewColorMap[2].NewColor = Color.FromArgb(14, 29, 59);
 
             manager.ObjectLayer.Add(naruto);
         }
 
+
     }
 }
+                          
                         </code>
                       </pre>
                     </p>
                     <p><img src="repos/MELHARFI-2D-Game-Engine/assets/coloredPart3.png"></p>
-                    <p>This is a zoomed picture and in fact we can see that some space remain white and need's to be rechecked but i think you got the point.</p>
+                    <p>Now the pant is fully painted whith color gradient.</p>
                     <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-20-astar.html'">Next Chapter 20. AStar Pathfinding>></button></p>
                   </div>
                 </div>
