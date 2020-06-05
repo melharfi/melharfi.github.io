@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Author Web Page</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -9,22 +9,22 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="highlight/styles/dracula.css">
-        <script src="highlight/highlight.pack.js"></script>
+        <link rel="stylesheet" href="../../highlight/styles/dracula.css">
+        <script src="../../highlight/highlight.pack.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <!----NavigationBar---->
         <section id="nav-bar">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="img/logo.jpg"></a>
+                <a class="navbar-brand" href="#"><img src="../../img/logo.jpg"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="index.html">HOME</a>
-                    <a class="nav-item nav-link" href="repos.html">REPOS</a>
+                    <a class="nav-item nav-link" href="../../index.html">HOME</a>
+                    <a class="nav-item nav-link" href="../../repos.html">REPOS</a>
                   </div>
                 </div>
               </nav>
@@ -39,25 +39,25 @@
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="img/1.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/1.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Welcome to The-Morpher Github Page</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/2.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/2.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Love programming and discover new technologies</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/3.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/3.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>All my repos is shared</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/4.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/4.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Feel free to give me a hint if anything need a tweak</h5>
                     </div>
@@ -86,16 +86,25 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>17. Childs</h3></b></p>
-                    <p>Child is the ability to add graphic object inside thatobject itself, as a picture inside a picture will be then superposed, and to illustrate this let's say that there's a Rectangle object as a <b>Conteiner or parent</b> and inside of it there is a bunch of items <b>Child</b> like some informations as the lifepoints and Shield.</p>
-                    <p>The good thing to store objects inside another object is that you don't worry about moving them one by one as you have to move only the parent and the others will be moved depending on their relative position of the parent like a player moving and it's name above hime move same time.</p>
-                    <p>Assuming this code.</p>
+                    <p><b><h3>10. Mouse events</h3></b></p>
+                    <p><b>Mouse Events</b></p>
+                    <p>Time to add some interactions with our objects.</p>
+                    <p>Each drawing class (Bmp,Anim,Rec,Txt) inherit from an <b>Interface</b> called IGfx, the particular job of this interface is to make all inherited classes got something in common, and guess what !! all those classes has same events and some stuff like Name, Tag, Visible, Z-Index but we are going to see only events right now</p>
+                    <p><li><b>MouseClic</b></li></p>
+                    <p><li><b>MouseDoubleClic</b></li></p>
+                    <p><li><b>MouseDown</b></li></p>
+                    <p><li><b>MouseUp</b></li></p>
+                    <p><li><b>MouseOver</b></li></p>
+                    <p><li><b>MouseMove</b></li></p>
+                    <p><li><b>MouseOut</b></li></p>
+                    <p>To bind an object to an event just follow your object name by <b>"".MouseClic +="</b> and then intellisense ask you if you want to auto generate a method using the "Tab" button.</p>
+                    <p><img src="assets/eventMouseClic.png"></p>
+                    <p><img src="assets/cloudClick.png"></p>
                     <p>
                       <pre>
                         <code class="csharp">
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using MELHARFI.Manager;
 using MELHARFI.Manager.Gfx;
@@ -111,96 +120,53 @@ namespace _2dProject
             Manager manager = new Manager(this, "CORE_ENGINE");
             manager.Background = Color.Blue;
 
-            Anim player = new Anim(150, manager);
-            player.AddCell("narutoStep1.png", 0, 0, 0);
-            player.AddCell("narutoStep2.png", 1, 0, 0);
-            player.AddCell("narutoStep3.png", 2, 0, 0);
-            player.AddCell("narutoStep4.png", 3, 0, 0);
-            player.Ini(Manager.TypeGfx.Object, "naruto", false);
-            player.Bmp.Point = new Point(100, 200);
-            manager.ObjectLayer.Add(player);
-            player.PointOfParent = true;            // necessary to not depend on relativ position of offsets
-            
-            // new instance of stats class
-            Stats playerStats = new Stats();
-            playerStats.Name = "Naruto";
-            playerStats.LifePoints = 5;
+            Bmp cloudPicture = new Bmp("cloud.png", new Point(0, 0), manager);
+            cloudPicture.MouseClic += CloudPicture_MouseClic;
+            manager.BackgroundLayer.Add(cloudPicture);
 
-            // Link Stats instance to the Tag of the player
-            player.Tag = playerStats;
-
-            Txt playerName = new Txt(playerStats.Name, new Point(0, -40), "playerName", Manager.TypeGfx.Object, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
-            player.Childs.Add(playerName);
-
-            Txt playerLifePoints = new Txt(playerStats.LifePoints.ToString(), new Point(0, -25), "playerLifePoints", Manager.TypeGfx.Object, true, new Font("Verdana", 10, FontStyle.Bold), Brushes.Pink, manager);
-            player.Childs.Add(playerLifePoints);
-
-            KeyDown += Form1_KeyDown;
-            KeyUp += Form1_KeyUp;
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void CloudPicture_MouseClic(Bmp bmp, MouseEventArgs e)
         {
-            Manager manager = Manager.Managers.First(f => f.Name == "CORE_ENGINE");
-            Anim player = manager.ObjectLayer.First(f => f.Name == "naruto") as Anim;
-
-            player.Stop();
-        }
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            Manager manager = Manager.Managers.First(f => f.Name == "CORE_ENGINE");
-            Anim player = manager.ObjectLayer.First(f => f.Name == "naruto") as Anim;
-
-            if (player.AnimState == Anim.State.STOPED)
-                player.Start();
-
-            player.Point = new Point(player.Point.X + 5, player.Point.Y);
-        }
-
-        public class Stats
-        {
-            public string Name;
-            public int LifePoints;
+            MessageBox.Show("Cloud has been clicked");
         }
     }
 }
-</code>
-</pre>
-</p>
+                        </code>
+                      </pre>
+                    </p>
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = '11-controls.html'">Next Chapter 11. Controls and ControlLayer>></button></p>
 
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/narutoMoving.gif"></p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-18-sprite-sheet.html'">Next Chapter 18. Sprite Sheet>></button></p>
                   </div>
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-05-rec.html">05. Rec (Rectangle)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
-                <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
-                <p><b>>>16. Tag</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-17-childs.html">17. Childs</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-20-astar.html">20. AStar pathfinding</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-21-lidgren.html">21. LidgrenNetwork</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-22-drawing-surface.html">22. Drawing Surface</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-23-flickering.html">23. Flickering issue</a></p>
+                <p><a href="description.html">Description</a></p>
+                <p><a href="01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><a href="03-drawing-classes.html">03. Drawing classes</a></p>
+                <p><a href="04-bmp.html">04. Bmp (Bitmap)</a></p>
+                <p><a href="05-rec.html">05. Rec (Rectangle)</a></p>
+                <p><a href="06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><a href="09-error.html">09. Error handling</a></p>
+                <p><b>>>10. Mouse events</b></p>
+                <p><a href="11-controls.html">11. Controls and ControlLayer</a></p>
+                <p><a href="12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
+                <p><a href="13-cryptography.html">13. Cryptography</a></p>
+                <p><a href="14-show-hide.html">14. Show, Hide</a></p>
+                <p><a href="15-igfx.html">15. Interface IGfx</a></p>
+                <p><a href="16-tag.html">16. Tag</a></p>
+                <p><a href="17-childs.html">17. Childs</a></p>
+                <p><a href="18-sprite-sheet.html">18. Sprite Sheet</a></p>
+                <p><a href="19-converting-color.html">19. Converting color</a></p>
+                <p><a href="20-astar.html">20. AStar pathfinding</a></p>
+                <p><a href="21-lidgren.html">21. LidgrenNetwork</a></p>
+                <p><a href="22-drawing-surface.html">22. Drawing Surface</a></p>
+                <p><a href="23-flickering.html">23. Flickering issue</a></p>
               </div>
               <!----End Summary---->
             </div>

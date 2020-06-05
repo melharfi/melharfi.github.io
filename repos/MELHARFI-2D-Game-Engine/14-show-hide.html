@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Author Web Page</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -9,22 +9,22 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="highlight/styles/dracula.css">
-        <script src="highlight/highlight.pack.js"></script>
+        <link rel="stylesheet" href="../../highlight/styles/dracula.css">
+        <script src="../../highlight/highlight.pack.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <!----NavigationBar---->
         <section id="nav-bar">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="img/logo.jpg"></a>
+                <a class="navbar-brand" href="#"><img src="../../img/logo.jpg"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="index.html">HOME</a>
-                    <a class="nav-item nav-link" href="repos.html">REPOS</a>
+                    <a class="nav-item nav-link" href="../../index.html">HOME</a>
+                    <a class="nav-item nav-link" href="../../repos.html">REPOS</a>
                   </div>
                 </div>
               </nav>
@@ -39,25 +39,25 @@
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="img/1.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/1.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Welcome to The-Morpher Github Page</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/2.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/2.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Love programming and discover new technologies</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/3.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/3.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>All my repos is shared</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/4.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/4.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Feel free to give me a hint if anything need a tweak</h5>
                     </div>
@@ -86,129 +86,70 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>20. AStar pathfinding</h3></b></p>
-                    <p><b><li>AStar (A*) pathfinding</li></b></p>
-                    <p>AStar is an algorithm developed by many persons, you can find many version along your search, for me i pick one from a sample and i extract just the logic from it and do some changes:</p>
-                    <p>Cleaning old version from stuff not needed and make it simpler to use.</p>
-                    <p>Old version needs that the matrix should be square like 50 * 50 or 120 * 120 grid, and never 50 * 30, to resolve that problem, I have just marked the other spaces as obstacles to be ignored.</p>
-                    <p>Old version take the matrix information from a file, and not by code, now you can push a matrix directly by code.</p>
-                    <p>Old version used a reversed orientation when pushing the matrix, you must give the Y value followed by the X Value, now i reversed this method to give X followed by Y.</p>
-                    <p><b><li>What A* do ?</li></b></p>
-                    <p>Well it just give you a way point, from a start position until the end point,</p>
-                    <p>For that you must give a grid called matrix, and in that grid must contain information about each cell call a nods.</p>
-                    <p>The cells could be in 4 states</p>
-                    <b>Walking node = 0</b>
-                    <p>Water node = 1</p>
-                    <p>Fire node = 2</p>
-                    <p>Wall = 3;</p>
-                    <p><b><li>How to use it ?</li></b></p>
-                    <p>You should add a using reference to <b>using MELHARFI.AStarAlgo;</b></p>
-                    <p>After that you need to initialize the Matrix</p>
-                    <p>This is all the code documented.</p>
+                    <p><b><h3>14. Show, Hide</h3></b></p>
+                    <p>Maybe you have seen in every IGfx object's constructor there is a property visible, which make an object visible or not.</p>
+                    <p>Ofcourse thi property could be changed later <b>"object.Vsisible = false"</b> but there other stuff for dealing with visibility of an object that we gonna see above.</p>
+                    <p>To hide every asset in a specific layer :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using MELHARFI.Manager;
-using MELHARFI.Manager.Gfx;
-using MELHARFI.AStar;
-using System.Collections.Generic;
+manager.HideBackgroundLayer(true);  // to hide all background assets
+manager.HideObjectLayer(true);  // to hide all background assets
+manager.HideControlLayer(true);  // to hide all Windows controls
+manager.HideTopLayer(true);  // to hide all top assets
 
-namespace _2dProject
-{
-    public partial class Form1 : Form
-    {
-        // (a new instance of the MAP that hold the grid inside) not initialized yet
-        private Map map = null;
-        //(a list that hold the pathfinding node, that we should clear each time we generate a new path)
-        private List<MapPoint> shortestPath = new List<MapPoint>();
+// or
 
-        public Form1()
-        {
-            InitializeComponent();
-
-            Manager manager = new Manager(this, "CORE_ENGINE");
-            manager.Background = Color.WhiteSmoke;
-
-            
-            //we create a grid that hold the information of our map, as obstacles (players, walls ...)
-            // for ex we'll take a X = 7, Y = 8 grid :
-
-            byte[,] byteMap = new byte[7, 8];
-            for (int i = 0; i< 7; i++)
-                for (int j = 0; j< 8; j++)
-                    byteMap[i, j] = 0;  // all nodes is initialized as marked as walked nodes for the moment
-
-            // first we initialized the grid that hold the obstacles
-            // to make some nodes as not walking, simply mark them as obstacle:
-            byteMap[2, 0] = 3; // in the column (X) 2, and line (Y) 0 there is an obstacle
-
-            // generating map depending on the matrix
-            // Start Point is (0,0) and end Point is (3,0), and the matrix of the map as 5th argument
-            map = new Map(7, 8, new MapPoint(0, 0), new MapPoint(3, 0), byteMap);
-            shortestPath.Clear(); // we clear the waypoint/pathfinding nodes
-
-            // new instance of AStar class that take our map as argument to handle it
-            AStar AStar = new AStar(this.map);
-
-            // we generate the waypoint with the CalculateBestPath() function
-            List<MapPoint> sol = AStar.CalculateBestPath();
-
-            // we put the result in the sol List
-            if (sol != null) this.shortestPath.AddRange(sol);
-                sol.Reverse();
-            
-            #region show result
-            string data = "";
-            foreach (MapPoint mp in sol)
-                data += "(" + mp.X + "-" + mp.Y + ") ";
-
-            MessageBox.Show(data);
-            #endregion
-        }
-
-    }
-}
+manager.HideBackgroundLayer(false);  // to show all background assets
+manager.HideObjectLayer(false);  // to show all background assets
+manager.HideControlLayer(false);  // to show all Windows controls
+manager.HideTopLayer(false);  // to show all top assets
                         </code>
                       </pre>
                     </p>
-                    <p>The <b>sol.Reverse();</b> make sure that the result is reversed because the result is from the endpoint to the start by default, or we wanted it to be from start to the end.</p>
-                    <p>Sol has now 5 nodes with it's there X, Y positions and i let you the way you extract the information as you fit.</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/astartResult.PNG"></p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-21-lidgren.html'">Next Chapter 20. Lidgren Network>></button></p>
+
+                    <p><b><li>Issue 1 with HideControlLayer</li></b></p>
+                    <p>There is a specific scenario that will cause an unwanted behavior when we deal with hide object or specifically the <b>controls</b>.</p>
+                    <p>To illustrate this let's say that we have a game with a hidden object like a console 'ReachTextBox' that supossed to show some debug information but hidden by default for lamba user and only accessible by a shortcut.</p>
+                    <p>In some point you want to hide every object of your game, which flag them all as visible = false.</p>
+                    <p>Now imagine that after some behavior you want to show them back with <b>HideControlLayer(true);</b>.</p>
+                    <p>You will notice that event the console will be visible too and it's not what we want.</p>
+                    <p>So we want somehow to escape from <b>HideControlLayer(true);</b>b that's why i add another layer to store control object that we de not want them to be affected by <b>HideControlLayer(true);</b>.</p>
+                    <p><b>GfxControlLayerOnlyVisible is a layer not accessible directly by user and meant for this behavior only.</b></p>
+                    <p>So if you want to escape that issue you better use <b>HideControlLayerOnlyVisible(true)</b> instead of <b>HideControlLayer(true);</b> to hide your controls.</p>
+                    <p>Pay attention that this behavior is only with Controls object.</p>
+                    
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = '15-igfx.html'">Next Chapter 15. Interface IGfx>></button></p>
                   </div>
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-05-anim.html">05. Rec (Rectangle)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a>></p>
-                <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-17-childs.html">17. Childs</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
-                <p><b>>>20. AStar pathfinding</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-21-lidgren.html">21. LidgrenNetwork</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-22-drawing-surface.html">22. Drawing Surface</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-23-flickering.html">23. Flickering issue</a></p>
+                <p><a href="description.html">Description</a></p>
+                <p><a href="01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><a href="03-drawing-classes.html">03. Drawing classes</a></p>
+                <p><a href="04-bmp.html">04. Bmp (Bitmap)</a></p>
+                <p><a href="05-rec.html">05. Rec (Rectangle)</a></p>
+                <p><a href="06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><a href="09-error.html">09. Error handling</a></p>
+                <p><a href="10-mouse-events.html">10. Mouse events</a></p>
+                <p><a href="11-controls.html">11. Controls and ControlLayer</a></p>
+                <p><a href="12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</a></p>
+                <p><a href="13-cryptography.html">13. Cryptography</a></p>
+                <p><b>>>14. Show, Hide</b></p>
+                <p><a href="15-igfx.html">15. Interface IGfx</a></p>
+                <p><a href="16-tag.html">16. Tag</a></p>
+                <p><a href="17-childs.html">17. Childs</a></p>
+                <p><a href="18-sprite-sheet.html">18. Sprite Sheet</a></p>
+                <p><a href="19-converting-color.html">19. Converting color</a></p>
+                <p><a href="20-astar.html">20. AStar pathfinding</a></p>
+                <p><a href="21-lidgren.html">21. LidgrenNetwork</a></p>
+                <p><a href="22-drawing-surface.html">22. Drawing Surface</a></p>
+                <p><a href="23-flickering.html">23. Flickering issue</a></p>
               </div>
               <!----End Summary---->
             </div>

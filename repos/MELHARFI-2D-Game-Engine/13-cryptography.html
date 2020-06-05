@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Author Web Page</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -9,22 +9,22 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="highlight/styles/dracula.css">
-        <script src="highlight/highlight.pack.js"></script>
+        <link rel="stylesheet" href="../../highlight/styles/dracula.css">
+        <script src="../../highlight/highlight.pack.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <!----NavigationBar---->
         <section id="nav-bar">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="img/logo.jpg"></a>
+                <a class="navbar-brand" href="#"><img src="../../img/logo.jpg"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="index.html">HOME</a>
-                    <a class="nav-item nav-link" href="repos.html">REPOS</a>
+                    <a class="nav-item nav-link" href="../../index.html">HOME</a>
+                    <a class="nav-item nav-link" href="../../repos.html">REPOS</a>
                   </div>
                 </div>
               </nav>
@@ -39,25 +39,25 @@
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="img/1.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/1.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Welcome to The-Morpher Github Page</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/2.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/2.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Love programming and discover new technologies</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/3.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/3.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>All my repos is shared</h5>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/4.jpg" class="d-block img-fluid w-100">
+                    <img src="../../img/4.jpg" class="d-block img-fluid w-100">
                     <div class="carousel-caption">
                       <h5>Feel free to give me a hint if anything need a tweak</h5>
                     </div>
@@ -86,72 +86,114 @@
                   </div>
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>05. Rec (Rectangle)</h3></b></p>
-                    <p><b>Rec class</b></p>
-                    <p>Sometime you just need to draw a rectangle filled with a color inside, it's pretty useful to show a message, or for any reason and believe me you'll need it a lot of time.</p>
-                    <p>Let's take a look to the constructors.</p>
-                    <p>There’s 2 overloads, an empty one, and another one with 6 parameters (Brush, Point, Size, Name, TypeGfx, Visible)</p>
-                    <p><b>Brush </b> is the color of the rectangle</p>
-                    <p><b>Point</b></p>
-                    <p><b>Size</b></p>
-                    <p><b>Name</b></p>
-                    <p><b>TypeGfx</b></p>
-                    <p><b>Visible </b> : to identify object as it's type if is it a background or Object or Top</p>
+                    <p><b><h3>13. Cryptography</h3></b></p>
+                    <p><b><h4>Encrypting assets</h4></b></p>
+                    <p>The idea is when you attempt to create a game, you probably want to keep your assets as pictures encrypted and not clearly visible so another person can modify them.</p>
+                    <p>For that purpose i made a tool to encrypt and decrypt them so  they will be not readable.</p>
+                    <p>Here is the latest release of EncryptDecrypt tool <a href="https://github.com/melharfi/CryptDecrypt/releases">Link</a></p>
+                    <p>Here is the link of the repository if you want more details about the source code and How to : <a href="https://github.com/melharfi/CryptDecrypt">CryptDecrypt</a></p>
+                    <p><b><li>How to use an encrypted asset in MELHARFI Engine</li></b></p>
+                    <p>After that you just need to use the correct overload of the <b>Bmp</b> or <b>Anim</b> object and specify the 2 keys for encrypting like so :</p>
                     <p>
                       <pre>
                         <code class="csharp">
-Rec box1 = new Rec(Brushes.Red, new Point(100, 100), new Size(80, 80), "box1", Manager.TypeGfx.Background, true, manager);
-manager.BackgroundLayer.Add(box1);
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            manager.Background = Color.CadetBlue;
+
+            Bmp supermario = new Bmp(@"supermario_encrypted.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, "↔⊆b¤õΔ⑨É", "❿9<#§∴Q➚", manager);
+            manager.ObjectLayer.Add(supermario);
+        }
+
+    }
+}
                         </code>
                       </pre>
                     </p>
 
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch6-rec1.PNG"></p>
-                    <p>You can add a border of the rectangle.</p>
+                    <p>The 2 keys "↔⊆b¤õΔ⑨É", "❿9<#§∴Q➚" are generated using the tool, and another image has been generated supermario_encrypted.png</p>
+                    <p><b><h4>Encode64 / Decode64</h4></b></p>
+                    <p>There is a built-in encryption using <b>Base64</b> which is quite familiar but still usefull to give an easy encrypting layer especially when you want to encrypt the text sent by the network.</p>
+
                     <p>
                       <pre>
                         <code class="csharp">
-Rec box1 = new Rec(Brushes.Red, new Point(100, 100), new Size(80, 80), "box1", Manager.TypeGfx.Background, true, manager);
-box1.BorderColor = Color.Black;
-box1.BorderWidth = 2;
-manager.BackgroundLayer.Add(box1);
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using MELHARFI.Manager;
+using MELHARFI.Manager.Gfx;
+
+namespace _2dProject
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+            Manager manager = new Manager(this, "manager");
+            manager.Background = Color.CadetBlue;
+
+            string message = "Hello World";
+            Crypt crypt = new Crypt();
+            string encryptMessage = crypt.Encode64(message);
+            // encryptMessage has the value = "SGVsbG8gV29ybGQ="
+
+            string decryptedMessage = crypt.Decode64(encryptMessage);
+            // decrypted value is "Hello World"
+        }
+    }
+}
                         </code>
                       </pre>
                     </p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/ch6-rec2.PNG"></p>
-
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = 'melharfi-2d-game-engine-wiki-06-anim.html'">Next Chapter 06. Anim>></button></p>
-
+                    <p><button type="button" class="btn btn-primary" onclick="window.location = '14-show-hide.html'">Next Chapter 14. Show, Hide>></button></p>
                   </div>
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
-                <p><a href="melharfi-2d-game-engine-wiki-description.html">Description</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-01-initializing.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-02-superposition.html">02. Superposition and ZIndex</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-03-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-04-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><b>>>05. Rec (Rectangle)</b></p>
-                <p><a href="melharfi-2d-game-engine-wiki-06-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-07-txt.html">07. Txt (Text)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-09-error.html">09. Error handling</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-11-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-12-remove-clear-fixedObjectLayer.html">12. Remove, Clear and FixedObjectLayer</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-13-cryptography.html">13. Cryptography</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-14-show-hide.html">14. Show, Hide</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-15-igfx.html">15. Interface IGfx</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-16-tag.html">16. Tag</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-17-childs.html">17. Childs</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-18-sprite-sheet.html">18. Sprite Sheet</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-19-converting-color.html">19. Converting color</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-20-astar.html">20. AStar pathfinding</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-21-lidgren.html">21. LidgrenNetwork</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-22-drawing-surface.html">22. Drawing Surface</a></p>
-                <p><a href="melharfi-2d-game-engine-wiki-23-flickering.html">23. Flickering issue</a></p>
+                <p><a href="description.html">Description</a></p>
+                <p><a href="01-initializing.html">01. Initializing MELHARFI engine</a></p>
+                <p><a href="02-superposition.html">02. Superposition and ZIndex</a></p>
+                <p><a href="03-drawing-classes.html">03. Drawing classes</a></p>
+                <p><a href="04-bmp.html">04. Bmp (Bitmap)</a></p>
+                <p><a href="05-rec.html">05. Rec (Rectangle)</a></p>
+                <p><a href="06-anim.html">06. Anim (Animation)</a></p>
+                <p><a href="07-txt.html">07. Txt (Text)</a></p>
+                <p><a href="08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
+                <p><a href="09-error.html">09. Error handling</a></p>
+                <p><a href="10-mouse-events.html">10. Mouse events</a></p>
+                <p><a href="11-controls.html">11. Controls and ControlLayer</a></p>
+                <p><a href="12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</a></p>
+                <p><b>>>13. Cryptography</b></p>
+                <p><a href="14-show-hide.html">14. Show, Hide</a></p>
+                <p><a href="15-igfx.html">15. Interface IGfx</a></p>
+                <p><a href="16-tag.html">16. Tag</a></p>
+                <p><a href="17-childs.html">17. Childs</a></p>
+                <p><a href="18-sprite-sheet.html">18. Sprite Sheet</a></p>
+                <p><a href="19-converting-color.html">19. Converting color</a></p>
+                <p><a href="20-astar.html">20. AStar pathfinding</a></p>
+                <p><a href="21-lidgren.html">21. LidgrenNetwork</a></p>
+                <p><a href="22-drawing-surface.html">22. Drawing Surface</a></p>
+                <p><a href="23-flickering.html">23. Flickering issue</a></p>
               </div>
               <!----End Summary---->
             </div>
