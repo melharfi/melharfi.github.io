@@ -89,7 +89,7 @@
 
                     <p><b><h3>02. Superposition and ZIndex</h3></b></p>
                     <p>Superposition of layers</p>
-                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/3/logo2.png"></p>
+                    <p><img src="repos/MELHARFI-2D-Game-Engine/assets/logo2.png"></p>
                     <p>For any 2D game, you should notice that there is background, content and top layer:</p>
                     <p><b>BackgroundLayer</b>, is the color or a background picture, it could be many assets as the first layer and it stand in the back (layer 1)</p>
                     <p><b>ObjectLayer</b> like players, monsters... that come front of background (layer 2)</p>
@@ -98,7 +98,7 @@
                     <p><b>FixedObjectLayer</b> i add that layer to reference some object that i dont want them to be removed especially when cleaning screen, usefull when i want to redraw my screen or change it whitout touching some objects like hud which is static, that mean it's not a layer to draw objects but reference some object already drawn and not cosidered as a drawning layer therefore not superposed to the previouse layers.</p>
                     <p><b>ControlLayer</b> in this layer we reference all Windows controls used like buttons, radio, checkbox, panel... it's necessary to reference them in case we want to hide a menu that thoses controls and we must keep a reference of them to ControlLayer to hide them or remove them, kkep in minde that those controls area always drawn in top even over TopLayer but excluded from superposition of other layers cause it store only Windows Controls not shapes.</p>
                     <p>Thoses layers are displayed in superposition, the BackgroundLayer come first, and ObjectLayer came over the background, and TopLayer is always displayed on the Top.</p>
-                    <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/3/asset1.PNG" alt="" width="800" height="566" onclick="ShowModalImage('myImg1')"></p>
+                    <p><img id="myImg1" class="myImg" src="repos/MELHARFI-2D-Game-Engine/assets/asset1.PNG" alt="" width="800" height="566" onclick="ShowModalImage('myImg1')"></p>
                     <p>On each layer, you can add many item (image, shape) as you want.</p>
                     <p>For background layer maybe you have a color background, cloud, building...</p>
                     <p>For content layer you have your plane, and enemy planes that shoot you some missiles...</p>
