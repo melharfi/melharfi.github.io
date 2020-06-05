@@ -87,15 +87,6 @@
                   <div class="repos-content-sub">
                     <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
                     <p><b><h3>19. Converting color</h3></b></p>
-                    <p><b><li>GetPixel()</li></b></p>
-                    <p>This method let you pick a color from all your screen by a given point represented as X and Y value :</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-Color color1 = manager.GetPixel(10, 10);
-                        </code>
-                      </pre>
-                    </p>
                     <p><b><li>NewColorMap</li></b></p>
                     <p>NewColorMap is a ColorMap object its particular job is to replace all pixels of a specific color on a picture by another color, useful if you want to paint your players by another color, for example changing the color of his eyes, his hair, skin ...</p>
                     <p>You have to make sure that the color to be changed is present only in the area you want, assuming the color of the eyes of your player is blue and his shoulder is also blue, then if you change the blue color to another one it's going to be done to his shoulders too. in that case you need to make the color of his eyes unique and not present somewhere else.</p>
