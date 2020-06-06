@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#000000" text="#FFFFFF" scroll=no>
+<script Language="JavaScript">
+var a=new Array(11);
+a[0]="AZµ!§²&jH9";
+a[1]="wmlké~#0JK";
+a[2]="*@œWXCV8nb";
+a[3]="QSqp ™£¥i4";
+a[4]="YUIOsL€±ßP";
+a[5]="uy©|z°a÷Œœ";
+a[6]="vx£$¥¤ML5d";
+a[7]="ù%^RT6hg3f";
+a[8]="àDFG€ BN7¡";
+a[9]="¢tre®*}12æ";
+a[10]="+o-*/EcØ4@";
+var b=c=d=e=f=g=h=i=-1000;
+pl=100;
+ctrl=1;
+loop2=0;
+car="strong";
+size=4;
+face="Courier New, Courier, mono";
+frame=20;
+/////////////////////////////////////////////////////
+document.write('<div id="Layer0" style="position:absolute; left:860px; top:320px; width:16px; height:526px; z-index:1"></div>');
+document.write('<div id="Layer1" style="position:absolute; left:800px; top:5px; width:16px; height:526px; z-index:1"><font face="Courier New, Courier, mono" size="4" color="#aaffaa"><strong>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|</strong></font></div>');
+document.write('<div id="Layer2" style="position:absolute; left:810px; top:5px; width:16px; height:526px; z-index:1"><font face="Courier New, Courier, mono" size="4" color="#99ff99"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu<br>&nbsp;&nbsp;&nbsp;&nbsp;MATRIX<br>__________________</strong></font></div>');
+document.write('<div id="Layer3" style="position:absolute; left:810px; top:80px; width:16px; height:526px; z-index:1"><font face="Courier New, Courier, mono" size="3" color="#55cc55">Style:</font><font color="#33aa33"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><a href="#" onClick=car="strong">BOLD</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;<em><a href="#" onClick=car="em">ITALIC</a></em></font><br><br><font face="Courier New, Courier, mono" size="3" color="#55cc55">Font&nbsp;Face:<form name="f1"><select name="menu1" onChange="list1()"><option>Courier New--MATRIX--</option><option>Times New Roman</option><option>Arial,Helvetica</option><option>Georgia</option><option>Verdana</option><option>Geneva</option><option>Comic Sans MS</option></select><br><br>Size :<br>&nbsp;&nbsp;&nbsp;<a href="#" onClick=size=1><font size="1">1</font></a>&nbsp;<a href="#" onClick=size=2><font size="2">2</font></a>&nbsp;<a href="#" onClick=size=3><font size="3">3</font></a>&nbsp;<a href="#" onClick=size=4><font size="4">4</font></a>&nbsp;<a href="#" onClick=size=5><font size="5">5</font></a>&nbsp;<a href="#" onClick=size=6><font size="6">6</font></a>&nbsp;<a href="#" onClick=size=7><font size="7">7</font></a><br><br>Frame&nbsp;Skip&nbsp;(SPEED):&nbsp;&nbsp;<input type="text" name="fs" size="3" maxlength="5" value=20><input type="button" value="-GO-" onClick=frame=document.f1.fs.value;Layer4.innerHTML="1&nbsp;Frame&nbsp;in&nbsp;"+((document.f1.fs.value)/1000)+"&nbsp;Seconds"></font></form></font></div>');
+document.write('<div id="Layer4" style="position:absolute; left:853px; top:320px; width:16px; height:526px; z-index:1"></div>');
+Layer4.innerHTML="1&nbsp;Frame&nbsp;in&nbsp;"+((document.f1.fs.value)/1000)+"&nbsp;Seconds";
+////////////////////////////////////////////////////
+creat();
+/////////////////   Boucle de creation de DIV //////
+function creat()
+{
+for (nc1=1;nc1<50;nc1++)
+	{
+	document.write
+('<div id="calc'+nc1+'" style="position:absolute; left:'+pl+'px; top:-700px; width:17px; height:46px; z-index:0;"></div>');
+	pl+=15;
+	nc1++;
+//	alert(pl);
+	}
+pl=100;
+for (nc2=1;nc2<51;nc2++)
+	{
+	nc2++;
+	document.write
+('<div id="calc'+nc2+'" style="position:absolute; left:'+pl+'px; top:-700px; width:17px; height:46px; z-index:0;"></div>');
+	pl+=15;
+//	alert(pl);
+	}
+}
+//////////////////////////////////////////////////
+div(0);
+//////////////////////////////////////////////////
+function list1()
+{
+cface=f1.menu1.selectedIndex+1;
+if(cface==1)
+face="Courier New, Courier, mono";
+else if(cface==2)
+face="Times New Roman, Times, serif";
+else if(cface==3)
+face="Arial, Helvetica, sans-serif";
+else if(cface==4)
+face="Georgia, Times New Roman, Times, serif";
+else if(cface==5)
+face="Verdana, Arial, Helvetica, sans-serif";
+else if(cface==6)
+face="Geneva, Arial, Helvetica, sans-serif";
+else face="Comic Sans MS, CopperDB, sans-serif";
+}
+/////////////////   TAG DIV   //////////////////
+function div(xom)                                                                                                                                                        //
+	{
+	if(xom==0)
+		{
+		if(loop2>=50)
+		loop2=0;
+		for(loop=1+loop2;loop<10+loop2;loop++)
+			{			
+			eval("calc"+loop).innerHTML="<font face='"+face+"' size='"+size+"'><"+car+"><font color='#004400'>"+al()+"<br>"+al()+"<br>"+al()+"<br>£<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>3<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>µ<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>¥<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>"+al()+"<br>0<br>"+al()+"<br>"+al()+"</"+car+"></font>";
+			loop++;
+			}
+		setTimeout("div(1)",100);
+		}
+	else{
+		for(loop=2+loop2;loop<10+1+loop2;loop++)
+			{
+			layer="calc"+loop;
+			eval(layer).innerHTML="<font face='"+face+"' size='"+size+"'><"+car+"><font color='#117711'>"+al()+"</font><br><font color='#118811'>"+al()+"</font><br><font color='#118811'>"+al()+"</font><br><font color='#008800'>0</font><br><font color='#009900'>"+al()+"</font><br><font color='#119911'>"+al()+"</font><br><font color='#119911'>"+al()+"</font><br><font color='#119911'>5</font><br><font color='#11aa11'>"+al()+"</font><br><font color='#11aa11'>&nbsp;</font><br><font color='#11aa11'>"+al()+"</font><br><font color='#11aa11'>$</font><br><font color='#11bb11'>"+al()+"</font><br><font color='#11bb11'>"+al()+"</font><br><font color='#11bb11'>"+al()+"</font><br><font color='#11bb11'>8</font><br><font color='#11bb11'>"+al()+"</font><br><font color='#11cc11'>ç</font><br><font color='#11cc11'>"+al()+"</font><br><font color='#00dd00'>&</font><br><font color='#00ff00'>"+al()+"</font><br><font color='#33ff33'>4</font><br><font color='#99ff99'>"+al()+"</font><br><font color='#bbffbb'>"+al()+"</font><br><font color='#eeffee'>"+al()+"</font><br><font color='#eeffee'>"+al()+"</"+car+">";
+			loop++;
+			}
+		loop2+=10;
+		setTimeout("div(0)",100);
+		}
+	}
+////////////////////////////////////////////////////
+pos1();
+pos2();
+pos3();
+pos4();
+pos5();
+pos6();
+pos7();
+pos8();
+////////////////////////////////////////////////////
+function pos1()
+	{
+	if(b>=615)
+		b=-700;
+	else
+		{
+		b+=4;
+		document.all.calc1.style.top=b+"px";
+		document.all.calc2.style.top=b+"px";
+		document.all.calc25.style.top=(b+100)+"px";
+		document.all.calc26.style.top=(b+100)+"px";
+		document.all.calc47.style.top=(b-300)+"px";
+		document.all.calc48.style.top=(b-300)+"px";
+		}
+	setTimeout("pos1()",frame);
+	}
+/////////////////////////////////////////////////////
+function pos2()
+	{
+	if(c>=615)
+		c=-700;
+	else
+		{
+		c+=6;
+		document.all.calc37.style.top=c+"px";
+		document.all.calc38.style.top=c+"px";
+		document.all.calc17.style.top=(c-180)+"px";
+		document.all.calc18.style.top=(c-180)+"px";
+		document.all.calc5.style.top=(c-250)+"px";
+		document.all.calc6.style.top=(c-250)+"px";
+		}
+	setTimeout("pos2()",frame);
+	}
+/////////////////////////////////////////////////////
+function pos3()
+	{
+	if(d>=615)
+		d=-700;
+	else
+		{
+		d+=8;
+		document.all.calc27.style.top=d+"px";
+		document.all.calc28.style.top=d+"px";
+		document.all.calc33.style.top=(d+200)+"px";
+		document.all.calc34.style.top=(d+200)+"px";
+		document.all.calc13.style.top=(d-300)+"px";
+		document.all.calc14.style.top=(d-300)+"px";
+		}
+	setTimeout("pos3()",frame);
+	}
+////////////////////////////////////////////////////
+function pos4()
+	{
+	if(e>=615)
+		e=-700;
+	else
+		{
+		e+=10;
+		document.all.calc35.style.top=e+"px";
+		document.all.calc36.style.top=e+"px";
+		document.all.calc9.style.top=(e-200)+"px";
+		document.all.calc10.style.top=(e-200)+"px";
+		document.all.calc49.style.top=(e+200)+"px";
+		document.all.calc50.style.top=(e+200)+"px";
+		
+		}
+	setTimeout("pos4()",frame);
+	}
+////////////////////////////////////////////////////
+function pos5()
+	{
+	if(f>=615)
+		f=-700;
+	else
+		{
+		f+=12;
+		document.all.calc23.style.top=f+"px";
+		document.all.calc24.style.top=f+"px";
+		document.all.calc39.style.top=(f+150)+"px";
+		document.all.calc40.style.top=(f+150)+"px";
+		document.all.calc3.style.top=(f-200)+"px";
+		document.all.calc4.style.top=(f-200)+"px";
+		}
+	setTimeout("pos5()",frame);
+	}
+/////////////////////////////////////////
+function pos6()
+	{
+	if(g>=615)
+		g=-700;
+	else
+		{
+		g+=14;
+		document.all.calc43.style.top=(g-150)+"px";
+		document.all.calc44.style.top=(g-150)+"px";
+		document.all.calc15.style.top=(g-250)+"px";
+		document.all.calc16.style.top=(g-250)+"px";
+		document.all.calc21.style.top=g+"px";
+		document.all.calc22.style.top=g+"px";
+		}
+	setTimeout("pos6()",frame);
+	}
+/////////////////////////////////////////
+function pos7()
+	{
+	if(h>=615)
+		h=-700;
+	else
+		{
+		h+=14;
+		document.all.calc29.style.top=(h-120)+"px";
+		document.all.calc30.style.top=(h-120)+"px";
+		document.all.calc7.style.top=h+"px";
+		document.all.calc8.style.top=h+"px";
+		document.all.calc45.style.top=(h-80)+"px";
+		document.all.calc46.style.top=(h-80)+"px";
+		}
+	setTimeout("pos7()",frame);
+	}
+/////////////////////////////////////////
+function pos8()
+	{
+	if(i>=615)
+		i=-700;
+	else
+		{
+		i+=14;
+		document.all.calc19.style.top=i+"px";
+		document.all.calc20.style.top=i+"px";
+		document.all.calc31.style.top=(i-200)+"px";
+		document.all.calc32.style.top=(i-200)+"px";
+		document.all.calc11.style.top=(i+80)+"px";
+		document.all.calc12.style.top=(i+80)+"px";
+		document.all.calc41.style.top=i+"px";
+		document.all.calc42.style.top=i+"px";
+		}
+	setTimeout("pos8()",frame);
+	}
+///////////////////////////////////////
+function al()
+	{
+	set=a[eval(Math.round(Math.random()*10))].charAt(eval(Math.round(Math.random()*10)));
+	return set;
+	}
+	////////////////////////////////////
+</script>
+</body>
+</html>
