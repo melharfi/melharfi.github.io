@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>MELHARFI 2D Game Engine - 13 Cryptography</title>
+        <title>ECLP - Verbs</title>
         <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -8,7 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+        
         <link rel="stylesheet" href="../../highlight/styles/dracula.css">
         <script src="../../highlight/highlight.pack.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
@@ -81,119 +81,135 @@
                 <h2>Repos</h2>
                 <div class="repos-content">
                   <div class="repos-content-job-title" style="color: darkcyan;">
-                    <p><img src="https://raw.githubusercontent.com/melharfi/MELHARFI-2D-Game-Engine/master/assets/logo.png"></p>
-                    <b>MELHARFI-2D-Game-Engine.</b>
+                    <p><img src="https://raw.githubusercontent.com/melharfi/ECLP/master/resources/logo.png"></p>
+                    <p><b><h3>ECLP {Easy Command Line Parser}.</h3></b></p>
                   </div>
                   <div class="repos-content-sub">
-                    <p><a href="https://github.com/melharfi/MELHARFI-2D-Game-Engine" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a></p>
-                    <p><b><h3>13. Cryptography</h3></b></p>
-                    <p><b><h4>Encrypting assets</h4></b></p>
-                    <p>The idea is when you attempt to create a game, you probably want to keep your assets as pictures encrypted and not clearly visible so another person can modify them.</p>
-                    <p>For that purpose i made a tool to encrypt and decrypt them so  they will be not readable.</p>
-                    <p>Here is the latest release of EncryptDecrypt tool <a href="https://github.com/melharfi/CryptDecrypt/releases">Link</a></p>
-                    <p>Here is the link of the repository if you want more details about the source code and How to : <a href="https://github.com/melharfi/CryptDecrypt">CryptDecrypt</a></p>
-                    <p><b><li>How to use an encrypted asset in MELHARFI Engine</li></b></p>
-                    <p>After that you just need to use the correct overload of the <b>Bmp</b> or <b>Anim</b> object and specify the 2 keys for encrypting like so :</p>
-                    <p>
-                      <pre>
-                        <code class="csharp">
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using MELHARFI.Manager;
-using MELHARFI.Manager.Gfx;
-
-namespace _2dProject
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-
-            Manager manager = new Manager(this, "manager");
-            manager.Background = Color.CadetBlue;
-
-            Bmp supermario = new Bmp(@"supermario_encrypted.png", new Point(100, 200), "supermario", Manager.TypeGfx.Object, true, "↔⊆b¤õΔ⑨É", "❿9<#§∴Q➚", manager);
-            manager.ObjectLayer.Add(supermario);
-        }
-
-    }
-}
-                        </code>
-                      </pre>
-                    </p>
-
-                    <p>The 2 keys "↔⊆b¤õΔ⑨É", "❿9<#§∴Q➚" are generated using the tool, and another image has been generated supermario_encrypted.png</p>
-                    <p><b><h4>Encode64 / Decode64</h4></b></p>
-                    <p>There is a built-in encryption using <b>Base64</b> which is quite familiar but still usefull to give an easy encrypting layer especially when you want to encrypt the text sent by the network.</p>
-
-                    <p>
-                      <pre>
-                        <code class="csharp">
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using MELHARFI.Manager;
-using MELHARFI.Manager.Gfx;
-
-namespace _2dProject
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-
-            Manager manager = new Manager(this, "manager");
-            manager.Background = Color.CadetBlue;
-
-            string message = "Hello World";
-            Crypt crypt = new Crypt();
-            string encryptMessage = crypt.Encode64(message);
-            // encryptMessage has the value = "SGVsbG8gV29ybGQ="
-
-            string decryptedMessage = crypt.Decode64(encryptMessage);
-            // decrypted value is "Hello World"
-        }
-    }
-}
-                        </code>
-                      </pre>
-                    </p>
-                    <p><button type="button" class="btn btn-primary" onclick="window.location = '14-show-hide.html'">Next Chapter 14. Show, Hide>></button></p>
+                    <a href="https://github.com/melharfi/ECLP" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a>
                   </div>
+                  <div class="repos-content-sub">
+                    <p><b><h3>01. Verbs</h3></b></p>
+                    <p>A command line can have as many as different verbs you like but by preference better keep the <b>Args</b> in the first of the command so that you cant identify them easily.</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System.Windows.Forms;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            string commandLine = "start 5 3.6 true T --verbose --noClip --showStats -p driver=steave -p age=30 -c players=steave|john|clark -xc players=steave:21|john:15|clark:30";
+            ECLP eCLP = new ECLP(commandLine);
+
+            CommandResult cr = eCLP.Parse();
+            Console.ReadKey();
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p>Assuming it's a console project, the <b>cr</b> contain 5 collections, each one is dedicated to a specific verb.</p>
+                    <p><img id="myImg1" class="myImg" src="assets/verbs.png" alt="" width="800" height="246" onclick="ShowModalImage('myImg1')"></p>
+                    <br>
+                    <p><b><li>Reading Verbs</li></b></p>
+                    <b>Manually</b>
+                    <p>Here is a way to display all data by fetching them 1 by one</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Linq;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string commandLine = "start 5 3,6 true T --verbose --noClip --showStats -p driver=steave -p age=30 -c players=steave|john|clark -xc players=steave:21|john:15|clark:30";
+
+            ECLP eCLP = new ECLP(commandLine);
+            CommandResult result = eCLP.Parse();
+
+            #region Args
+            foreach (var arg in result.Args)
+                Console.WriteLine("Arg " + arg.ToString() + " has a " + arg.GetType() + " type");
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region Flags
+            foreach (var flag in result.Flags)
+                Console.WriteLine("Flag " + flag.ToString() + " is set");
+            #endregion
+
+            #region Properties
+            foreach (var property in result.Properties)
+            {
+                string name = property.Key;
+                object value = property.Value;
+                Console.WriteLine("Property " + name + " has a value " + value + " and value type is " + value.GetType());
+            }
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region Collections
+            foreach (var collection in result.Collections)
+            {
+                string name = collection.Key;
+                object[] values = collection.Value;
+                Console.WriteLine("Collection " + name + " has " + values.Count() + " value(s)");
+                int counter = 0;
+                foreach(object value in values)
+                    Console.WriteLine("\tValue " + ++counter + " is " + value + " and its type is " + value.GetType());                
+            }
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region ExCollections
+            foreach (var exCol in result.ExCollections)
+            {
+                string name = exCol.Key;
+                var values = exCol.Value;
+                Console.WriteLine("ExCollection " + name + " has " + values.Count() + " value(s)");
+                foreach (var value in values)
+                {
+                    string subName = value.Key;
+                    var subValue = value.Value;
+                    Console.WriteLine("\tSub Property " + subName + " has value " + subValue + " and value type is " + subValue.GetType());
+                }
+
+            }
+            #endregion
+            Console.ReadKey();
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="assets/readingVerbs.PNG"></p>
+                    <p>In next chapter we will see another way to read the command using events.</p>
+                    <button type="button" class="btn btn-primary" onclick="window.location = '02-eventhandler.html'">Next Chapter 02. EventHandler>></button>
+                  </div>
+                  
                 </div>
               </div>
               <!----Summary---->
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
                 <p><a href="description.html">Description</a></p>
-                <p><a href="01-initializing.html">01. Initializing MELHARFI engine</a></p>
-                <p><a href="02-superposition.html">02. Superposition and ZIndex</a></p>
-                <p><a href="03-drawing-classes.html">03. Drawing classes</a></p>
-                <p><a href="04-bmp.html">04. Bmp (Bitmap)</a></p>
-                <p><a href="05-rec.html">05. Rec (Rectangle)</a></p>
-                <p><a href="06-anim.html">06. Anim (Animation)</a></p>
-                <p><a href="07-txt.html">07. Txt (Text)</a></p>
-                <p><a href="08-fillpolygon.html">08. FillPolygon (shapes)</a></p>
-                <p><a href="09-error.html">09. Error handling</a></p>
-                <p><a href="10-mouse-events.html">10. Mouse events</a></p>
-                <p><a href="11-controls.html">11. Controls and ControlLayer</a></p>
-                <p><a href="12-remove-clear-fixedObjectLayer.html">12. Remove,Clear and FixedObjectLayer</a></p>
-                <p><b>>>13. Cryptography</b></p>
-                <p><a href="14-show-hide.html">14. Show, Hide</a></p>
-                <p><a href="15-igfx.html">15. Interface IGfx</a></p>
-                <p><a href="16-tag.html">16. Tag</a></p>
-                <p><a href="17-childs.html">17. Childs</a></p>
-                <p><a href="18-sprite-sheet.html">18. Sprite Sheet</a></p>
-                <p><a href="19-converting-color.html">19. Converting color</a></p>
-                <p><a href="20-astar.html">20. AStar pathfinding</a></p>
-                <p><a href="21-lidgren.html">21. LidgrenNetwork</a></p>
-                <p><a href="22-drawing-surface.html">22. Drawing Surface</a></p>
-                <p><a href="23-flickering.html">23. Flickering issue</a></p>
+                <p><b>>>01. Verbs</b></p>
+                <p><a href="02-eventhandler.html">02. EventHandler</a></p>
               </div>
               <!----End Summary---->
             </div>
@@ -257,48 +273,47 @@ namespace _2dProject
         <!--------End image click to enlarge-------->
     </body>
 </html>
-
 <script language="javascript">
-//button toggle show/hide div
-function myFunction()
-{
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none")
+  //button toggle show/hide div
+  function myFunction()
   {
-    x.style.display = "block";
-  }
-  else
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none")
+    {
+      x.style.display = "block";
+    }
+    else
+    {
+      x.style.display = "none";
+    }
+  } 
+  ///////////Modal////////////
+  //https://www.w3schools.com/howto/howto_css_modal_images.asp
+  var span = document.getElementsByClassName("modalClose");
+  var modal = document.getElementById("myModal");
+  var modalImg = document.getElementById("newMyImg");
+  function ShowModalImage(myImg)
   {
-    x.style.display = "none";
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById(myImg);
+    var captionText = document.getElementById("caption");
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
   }
-} 
-///////////Modal////////////
-//https://www.w3schools.com/howto/howto_css_modal_images.asp
-var span = document.getElementsByClassName("modalClose");
-var modal = document.getElementById("myModal");
-var modalImg = document.getElementById("newMyImg");
-function ShowModalImage(myImg)
-{
-  // Get the image and insert it inside the modal - use its "alt" text as a caption
-  var img = document.getElementById(myImg);
-  var captionText = document.getElementById("caption");
-  modal.style.display = "block";
-  modalImg.src = img.src;
-  captionText.innerHTML = img.alt;
-}
-function CloseSpan()
-{
-  modal.style.display = "none";
-}
-/***Detect Esc btton to close Modal***/
-document.addEventListener('keydown', function(event){
-	if(event.key === "Escape"){
-		CloseSpan()
-	}
-});
-/***Hide modal when mouse clic***/
-modal.onclick = function(){
-		CloseSpan()
-};
-/////////////////////////////////////////
-</script>
+  function CloseSpan()
+  {
+    modal.style.display = "none";
+  }
+  /***Detect Esc btton to close Modal***/
+  document.addEventListener('keydown', function(event){
+    if(event.key === "Escape"){
+      CloseSpan()
+    }
+  });
+  /***Hide modal when mouse clic***/
+  modal.onclick = function(){
+      CloseSpan()
+  };
+  /////////////////////////////////////////
+  </script>
