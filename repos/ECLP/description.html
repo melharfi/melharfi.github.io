@@ -103,18 +103,18 @@
                     <p>A float value should has a comma as separator and not a dot, 3,6 is good, 3.5 is wrong</p>
                     <br>
                     <p><b>Type 2) Flags</b> are string type arguments without values, prefixed with double dash -- "--verbose --start --friendlyfire".</p>
-                    <p>Value is not parsed and it's a string type.</p>
-                    <p>Usually considered as if they are a bool, meaning that if a flag is set then it's equivalent to true by meaning.</p>
+                    <p>Value is not parsed and it's always a string type.</p>
+                    <p>Usually considered as if they are a boolean, I meaning if a flag is set then it's equivalent to true by meaning.</p>
                     <br>
-                    <p><b>Type 3) Properties</b> are a properties with values prefixed with -p "-p driver=steave -p age=30".</p>
-                    <p>Value is parsed to appropriate type, otherwize the default format is 'string'</p>
+                    <p><b>Type 3) Properties</b> are a property with value prefixed with -p "-p driver=steave".</p>
+                    <p>Value is parsed to its appropriate type, otherwize the default format is string</p>
                     <br>
                     <p><b>Type 4) Collections</b> is a property with a collection of values separated by Pipe |.</p>
                     <p>Should be prefixed with -c "-c players=steave|john|clark -c ages=21|15|30" players is the name of the property, and steave,john,clark are a list of object values.</p>
                     <br>
                     <p><b>Type 5) ExCollections</b> for Extanded Collections, it's a property with a collection of sub properties that have a value.</p>
                     <p>Should be prefixed with -xc "-xc players=steave:21|john:15|clark:30 -xc adresses=Japan:Tokyo|USA:Washington".</p>
-                    <p>Properties are separated by Pipe |, and sub property name and it's values are separated by double point : .</p>
+                    <p>Properties are separated by Pipe |, and sub property name and it's value are separated by double point : .</p>
                     
                     <button type="button" class="btn btn-primary" onclick="window.location = '01-verbs.html'">Next Chapter 01. Verbs>></button>
                   </div>

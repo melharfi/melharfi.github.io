@@ -198,7 +198,100 @@ namespace ConsoleApp1
                       </pre>
                     </p>
                     <p><img src="assets/readingVerbs.PNG"></p>
-                    <p>In next chapter we will see another way to read the command using events.</p>
+                    <p><b><li>Args</li></b></p>
+                    <p>Args verb is different than the other patterns, because others are identified by a name like <b>Properties, Collection, ExCollection</b> and <b>Flags</b> are a string types and then we can easily associate it since the value is known (a check value is suffisant).</p>
+                    <p>But Args are different because they dont have the same type and don't have an identification name, they could be any type, like <b>string, int, bool, float or char</b>.</p>
+                    <p>So no way to identify an arg unless if you fix their positions and make each index for a specific task.</p>
+                    <p>Assuming this command line <b>"James 29 false a"</b></p>
+                    <p>If we parse this command line we will get 4 arguments typed like so : <b>string</b>, <b>int</b>, <b>bool</b> and <b>char</b></p>
+                    <p>You have to make your application ready to associate the first index for the username which will equal to <b>James</b></p>
+                    <p>Second argument to his age which will equal to <b>29</b></p>
+                    <p>Third for activated or not for example which will be false "suspended or wait activation or whatever"</p>
+                    <p>Fourth for a user rank, in this case is <b>a</b> that could be for <b>Admin</b>, you can image other scenarios like <b>m</b> for moderator ...</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string commandLine = "James 29 false a";
+
+            ECLP eCLP = new ECLP(commandLine);
+            var result = eCLP.Parse();
+
+            if(result.Args.Count != 4)
+            {
+                Console.WriteLine("Command should have 4 arguments");
+                return;
+            }
+
+            string username = result.Args[0].ToString();
+            int age = 20; // default value
+
+            if(result.Args[1].GetType() == typeof(int))
+            {
+                age = (int)result.Args[1];
+            }
+            else
+            {
+                Console.WriteLine("Second argument for age should be an integer");
+                return;
+            }
+
+            bool activated;
+            if(result.Args[2].GetType() == typeof(bool))
+            {
+                activated = (bool)result.Args[2];
+            }
+            else
+            {
+                Console.WriteLine("Third argument for activation should be a boolean");
+                return;
+            }
+
+            char rank;
+            if(result.Args[3].GetType() == typeof(char))
+            {
+                rank = (char)result.Args[3];
+            }
+            else
+            {
+                Console.WriteLine("Fourth argument for account rank should be a char");
+                return;
+            }
+
+            Console.WriteLine("username is {0}", username);
+            Console.WriteLine("age is {0}", age);
+            Console.WriteLine("activated is {0}", activated);
+            Console.WriteLine("Account Rank {0}", rank);
+
+            Console.ReadKey();
+        }
+
+    }
+
+
+}
+                          
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img id="myImg2" class="myImg" src="assets/args.PNG" alt="" onclick="ShowModalImage('myImg2')"></p>
+                    <p>If you remember i told you that it's better to keep Args verbs in the beginning of the command line.</p>
+                    <p>Well it's not an obligation, assuming this command line :</p>
+                    <p><b>"James 29 false <span style="color: red;">-p language=En</span> a"</b></p>
+                    <p>Well the 3 first arguments have the same positions as before, but we just add another verb as a property, and then followed by the last argument that had the <b>fourth</b> index and now changed to the <b>fifth</b>.</p>
+                    <p>Well it's not true, because index is only applied to the <b>Args</b> verbs, meaning that event if there's some verbs in the middle the order will be incremented depending of the position of the last Arg verb.</p>
+                    <p>So nothing will be changed in the last code we wrote because the '<b>a</b>' will always have the fourth index.</p>
+                    <p>In the next chapter we will see another way to read the command using events.</p>
                     <button type="button" class="btn btn-primary" onclick="window.location = '02-eventhandler.html'">Next Chapter 02. EventHandler>></button>
                   </div>
                   
