@@ -88,8 +88,11 @@
                     <a href="https://github.com/melharfi/ECLP" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a>
                   </div>
                   <div class="repos-content-sub">
-                    <p><b><h3>01. Verbs</h3></b></p>
-                    <p>A command line can have as many as different verbs you like but by preference better keep the <b>Args</b> in the first of the command so that you cant identify them easily.</p>
+                    <p><b><h3>03. Parse</h3></b></p>
+                    <p>Parse function can use 2 ways of parsing, either using <b>Regex</b> or a <b>Side by side</b> words check algorithm.</p>
+                    <p><b>Using Regex</b></p>
+                    <p>Is the default way of parsing when you Parse() function without specifying <b>usingRegex</b> bool parameter inside the constructor because it have a true value by default</p>
+
                     <p>
                       <pre>
                         <code class="csharp">
@@ -107,6 +110,9 @@ namespace ConsoleApp1
             ECLP eCLP = new ECLP(commandLine);
 
             CommandResult cr = eCLP.Parse();
+            // or 
+            // CommandResult cr = eCLP.Parse(true);
+            // is the same suing regex
             Console.ReadKey();
         }
     }
@@ -114,12 +120,8 @@ namespace ConsoleApp1
                         </code>
                       </pre>
                     </p>
-                    <p>Assuming it's a console project, the <b>cr</b> contain 5 collections, each one is dedicated to a specific verb.</p>
-                    <p><img id="myImg1" class="myImg" src="assets/verbs.png" alt="" width="800" height="246" onclick="ShowModalImage('myImg1')"></p>
-                    <br>
-                    <p><b><li>Reading Verbs</li></b></p>
-                    <b>Manually</b>
-                    <p>Here is a way to display all data by fetching them 1 by one</p>
+                    <p><b>Side by side words check</b></p>
+                    <p>Is another way of parsing more pertinant but use a long code.</p>
                     <p>
                       <pre>
                         <code class="csharp">
@@ -136,161 +138,18 @@ namespace ConsoleApp1
             string commandLine = "start 5 3,6 true T --verbose --noClip --showStats -p driver=steave -p age=30 -c players=steave|john|clark -xc players=steave:21|john:15|clark:30";
 
             ECLP eCLP = new ECLP(commandLine);
-            CommandResult result = eCLP.Parse();
-
-            #region Args
-            foreach (var arg in result.Args)
-                Console.WriteLine("Arg " + arg.ToString() + " has a " + arg.GetType() + " type");
-            #endregion
-
-            Console.WriteLine(Environment.NewLine);
-
-            #region Flags
-            foreach (var flag in result.Flags)
-                Console.WriteLine("Flag " + flag.ToString() + " is set");
-            #endregion
-
-            #region Properties
-            foreach (var property in result.Properties)
-            {
-                string name = property.Key;
-                object value = property.Value;
-                Console.WriteLine("Property " + name + " has a value " + value + " and value type is " + value.GetType());
-            }
-            #endregion
-
-            Console.WriteLine(Environment.NewLine);
-
-            #region Collections
-            foreach (var collection in result.Collections)
-            {
-                string name = collection.Key;
-                object[] values = collection.Value;
-                Console.WriteLine("Collection " + name + " has " + values.Count() + " value(s)");
-                int counter = 0;
-                foreach(object value in values)
-                    Console.WriteLine("\tValue " + ++counter + " is " + value + " and its type is " + value.GetType());                
-            }
-            #endregion
-
-            Console.WriteLine(Environment.NewLine);
-
-            #region ExCollections
-            foreach (var exCol in result.ExCollections)
-            {
-                string name = exCol.Key;
-                var values = exCol.Value;
-                Console.WriteLine("ExCollection " + name + " has " + values.Count() + " value(s)");
-                foreach (var value in values)
-                {
-                    string subName = value.Key;
-                    var subValue = value.Value;
-                    Console.WriteLine("\tSub Property " + subName + " has value " + subValue + " and value type is " + subValue.GetType());
-                }
-
-            }
-            #endregion
-            Console.ReadKey();
+            CommandResult result = eCLP.Parse(false);
         }
     }
 }
                         </code>
                       </pre>
                     </p>
-                    <p><img src="assets/readingVerbs.PNG"></p>
-                    <p><b><li>Args</li></b></p>
-                    <p>Args verb is different than the other patterns, because others are identified by a name like <b>Properties, Collection, ExCollection</b> and <b>Flags</b> are a string types and then we can easily associate it since the value is known (a check value is suffisant).</p>
-                    <p>But Args are different because they dont have the same type and don't have an identification name, they could be any type, like <b>string, int, bool, float or char</b>.</p>
-                    <p>So no way to identify an arg unless if you fix their positions and make each index for a specific task.</p>
-                    <p>Assuming this command line <b>"James 29 false a"</b></p>
-                    <p>If we parse this command line we will get 4 arguments typed like so : <b>string</b>, <b>int</b>, <b>bool</b> and <b>char</b></p>
-                    <p>You have to make your application ready to associate the first index for the username which will equal to <b>James</b></p>
-                    <p>Second argument to his age which will equal to <b>29</b></p>
-                    <p>Third for activated or not for example which will be false "suspended or wait activation or whatever"</p>
-                    <p>Fourth for a user rank, in this case is <b>a</b> that could be for <b>Admin</b>, you can image other scenarios like <b>m</b> for moderator ...</p>
                     <p>
-                      <pre>
-                        <code class="csharp">
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using The_Morpher;
-
-namespace ConsoleApp1
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string commandLine = "James 29 false a";
-
-            ECLP eCLP = new ECLP(commandLine);
-            var result = eCLP.Parse();
-
-            if(result.Args.Count != 4)
-            {
-                Console.WriteLine("Command should have 4 arguments");
-                return;
-            }
-
-            string username = result.Args[0].ToString();
-            int age = 20; // default value
-
-            if(result.Args[1].GetType() == typeof(int))
-            {
-                age = (int)result.Args[1];
-            }
-            else
-            {
-                Console.WriteLine("Second argument for age should be an integer");
-                return;
-            }
-
-            bool activated;
-            if(result.Args[2].GetType() == typeof(bool))
-            {
-                activated = (bool)result.Args[2];
-            }
-            else
-            {
-                Console.WriteLine("Third argument for activation should be a boolean");
-                return;
-            }
-
-            char rank;
-            if(result.Args[3].GetType() == typeof(char))
-            {
-                rank = (char)result.Args[3];
-            }
-            else
-            {
-                Console.WriteLine("Fourth argument for account rank should be a char");
-                return;
-            }
-
-            Console.WriteLine("username is {0}", username);
-            Console.WriteLine("age is {0}", age);
-            Console.WriteLine("activated is {0}", activated);
-            Console.WriteLine("Account Rank {0}", rank);
-
-            Console.ReadKey();
-        }
-
-    }
-
-}                        
-                        </code>
-                      </pre>
-                    </p>
-                    <p><img id="myImg2" class="myImg" src="assets/args.PNG" alt="" onclick="ShowModalImage('myImg2')"></p>
-                    <p>If you remember i told you that it's better to keep Args verbs in the beginning of the command line.</p>
-                    <p>Well it's not an obligation, assuming this command line :</p>
-                    <p><b>"James 29 false <span style="color: red;">-p language=En</span> a"</b></p>
-                    <p>Well the 3 first arguments have the same positions as before, but we just add another verb as a property, and then followed by the last argument that had the <b>fourth</b> index and now changed to the <b>fifth</b>.</p>
-                    <p>Well it's not true, because index is only applied to the <b>Args</b> verbs, meaning that event if there's some verbs in the middle the order will be incremented depending of the position of the last Arg verb.</p>
-                    <p>So nothing will be changed in the last code we wrote because the '<b>a</b>' will always have the fourth index.</p>
-                    <p>In the next chapter we will see another way to read the command using events.</p>
-                    <button type="button" class="btn btn-primary" onclick="window.location = '02-eventhandler.html'">Next Chapter 02. EventHandler>></button>
+                    <p>The way there's 2 ways of parsing is because Regex is not all the time used by some third party as it was the case for me.</p>
+                    <p>I used ECLP in a third party application that use its own mono modified assembly which don't use regex at all and then i need to find another way to handle parsing.</p>
+                    <p>Regex can <b>sometime</b> can't match result in some weird scenarios as maybe it need to improve regex pattern which is not my best.</p>
+                    <button type="button" class="btn btn-primary">End :)</button>
                   </div>
                   
                 </div>
@@ -299,9 +158,9 @@ namespace ConsoleApp1
               <div class="col-md-2 skills-bar">
                 <p style="color: cadetblue; font-size: 20px;">Summary</p>
                 <p><a href="description.html">Description</a></p>
-                <p><b>>>01. Verbs</b></p>
+                <p><a href="01-verbs.html">01. Verbs</a></p>
                 <p><a href="02-eventhandler.html">02. EventHandler</a></p>
-                <p><a href="03-parse.html">03. Parse</a></p>
+                <p><b>>>03. Parse</b></p>
               </div>
               <!----End Summary---->
             </div>
