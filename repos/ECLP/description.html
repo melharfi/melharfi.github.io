@@ -19,8 +19,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="index.html">HOME</a>
-                    <a class="nav-item nav-link" href="repos.html"><b>REPOS</b></a>
+                    <a class="nav-item nav-link" href="https://melharfi.github.io/index.html">HOME</a>
+                    <a class="nav-item nav-link" href="https://melharfi.github.io/repos.html"><b>REPOS</b></a>
                   </div>
                 </div>
               </nav>
@@ -99,15 +99,15 @@
                     <p><b>Type 1) Args</b> are common arguments, could be any referenced primitif type like string, int, bool, float, and char.</p>
                     <p>ex "hello 5 true 3,5 T".</p>
                     <p>Arguments is parsed to its appropriate type, otherwize it return the default value "string".</p>
-                    <p>Make attention that positions of arguments is necessary so you can identify them in the Args list by there index.</p>
-                    <p>A float value should has a comma as separator and not a dot, 3,6 is good, 3.5 is wrong</p>
+                    <p>Make attention that positions of arguments is important so you can identify them in the Args list by its index.</p>
+                    <p>A float value should has a comma as separator and not a dot, 3,6 is good, 3.5 is wrong.</p>
                     <br>
                     <p><b>Type 2) Flags</b> are string type arguments without values, prefixed with double dash -- "--verbose --start --friendlyfire".</p>
-                    <p>Value is not parsed and it's always a string type.</p>
-                    <p>Usually considered as if they are a boolean, I meaning if a flag is set then it's equivalent to true by meaning.</p>
+                    <p>Value is not parsed to a specific type and it's always a string type.</p>
+                    <p>Usually considered as if they are a boolean, I mean if a flag is set then it's equivalent to true by meaning.</p>
                     <br>
                     <p><b>Type 3) Properties</b> are a property with value prefixed with -p "-p driver=steave".</p>
-                    <p>Value is parsed to its appropriate type, otherwize the default format is string</p>
+                    <p>Value is parsed to its appropriate type, otherwize the default format is string.</p>
                     <br>
                     <p><b>Type 4) Collections</b> is a property with a collection of values separated by Pipe |.</p>
                     <p>Should be prefixed with -c "-c players=steave|john|clark -c ages=21|15|30" players is the name of the property, and steave,john,clark are a list of object values.</p>
