@@ -144,18 +144,18 @@ namespace winform_test
                       </pre>
                     </p>
 
-                    <p><img id="myImg1" class="myImg" src="assets/sample2.png" onclick="ShowModalImage('myImg1')"></p>
+                    <p><img id="myImg1" class="myImg" src="assets/sample2.PNG" onclick="ShowModalImage('myImg1')"></p>
                     
                     <br><p>Pay attention that the value passed to the CheatCodeLite.CheatCodeLite(int keystrokesInterval) is the time allowed to keep chained cheat code, if this time is overwhelmed then the cheat code in progress is reseted.</p>
                     <p>To desable this timer just put a very long value like 100000000 :)</p>
                     
                     <br><p>Pay attention to some scenarios that will raise some error. When a cheat code is registred like "HELLO" in the first hand, and another cheat code is registred like "HELL", in that case the second cheat code will hide the first one because cheat code will be reset as soon as it trigger the "HELL" event, so to avoid that an exception will be thrown to prevent and warn you about that. </p>
-                    <p><img id="myImg2" class="myImg" src="assets/throwError1.png" onclick="ShowModalImage('myImg2')"></p>
+                    <p><img id="myImg2" class="myImg" src="assets/throwError1.PNG" onclick="ShowModalImage('myImg2')"></p>
                     <br><p>Same scenarion when the revers happen, when you first add a cheat code like "HELL" and that you just another one like "HELLO", then the second one will be hidden by the first one.</p>
-                    <p><img id="myImg3" class="myImg" src="assets/throwError2.png" onclick="ShowModalImage('myImg3')"></p>
+                    <p><img id="myImg3" class="myImg" src="assets/throwError2.PNG" onclick="ShowModalImage('myImg3')"></p>
 
                     <br><p>Same thing when a duplication is found.</p>
-                    <p><img id="myImg4" class="myImg" src="assets/throwError3.png" onclick="ShowModalImage('myImg4')"></p>
+                    <p><img id="myImg4" class="myImg" src="assets/throwError3.PNG" onclick="ShowModalImage('myImg4')"></p>
 
                   </div>
                   
