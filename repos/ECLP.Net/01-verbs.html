@@ -1,0 +1,411 @@
+<html>
+    <head>
+        <title>ECLP.Net - Verbs</title>
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="../../highlight/styles/dracula.css">
+        <script src="../../highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <!----NavigationBar---->
+        <section id="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src="../../img/logo.jpg"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="https://melharfi.github.io/index.html">HOME</a>
+                    <a class="nav-item nav-link" href="https://melharfi.github.io/repos.html"><b>REPOS</b></a>
+                  </div>
+                </div>
+              </nav>
+        </section>
+        <!----Slider---->
+        <div id="slider">
+            <div id="headerSlider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
+                  <li data-target="#headerSlider" data-slide-to="1"></li>
+                  <li data-target="#headerSlider" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="../../img/1.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Welcome to The-Morpher Github Page</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../../img/2.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Love programming and discover new technologies</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../../img/3.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>All my repos is shared</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../../img/4.jpg" class="d-block img-fluid w-100">
+                    <div class="carousel-caption">
+                      <h5>Feel free to give me a hint if anything need a tweak</h5>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+        </div>
+        <!----Repos---->
+        <section id="repos">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10">
+                <h2>Repos</h2>
+                <div class="repos-content">
+                  <div class="repos-content-job-title" style="color: darkcyan;">
+                    <p><img src="https://raw.githubusercontent.com/melharfi/ECLP.Net/master/resources/logo.png"></p>
+                    <p><b><h3>ECLP.Net {Easy Command Line Parser}.</h3></b></p>
+                  </div>
+                  <div class="repos-content-sub">
+                    <a href="https://github.com/melharfi/ECLP.Net" target="blank"><i class="fa fa-github" aria-hidden="true"></i>Got to repo.</a>
+                  </div>
+                  <div class="repos-content-sub">
+                    <p><b><h3>01. Verbs</h3></b></p>
+                    <p>A command line can have as many as different verbs you like but by preference better keep the <b>Args</b> in the first of the command so that you cant identify them easily.</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System.Windows.Forms;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            string commandLine = "start 5 3.6 true T --verbose --noClip --showStats -p driver=steave -p age=30 -c players=steave|john|clark -xc players=steave:21|john:15|clark:30";
+            ECLP eCLP = new ECLP(commandLine);
+
+            CommandResult cr = eCLP.Parse();
+            Console.ReadKey();
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p>Assuming it's a console project, the <b>cr</b> variable contain 5 collections, each one is dedicated to a specific verb.</p>
+                    <p><img id="myImg1" class="myImg" src="assets/verbs.png" alt="" width="800" height="246" onclick="ShowModalImage('myImg1')"></p>
+                    <br>
+                    <p><b><li>Reading Verbs</li></b></p>
+                    <b>Manually</b>
+                    <p>Here is a way to display all data by fetching them one by one</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Linq;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string commandLine = "start 5 3,6 true T --verbose --noClip --showStats -p driver=steave -p age=30 -c players=steave|john|clark -xc players=steave:21|john:15|clark:30";
+
+            ECLP eCLP = new ECLP(commandLine);
+            CommandResult result = eCLP.Parse();
+
+            #region Args
+            foreach (var arg in result.Args)
+                Console.WriteLine("Arg " + arg.ToString() + " has a " + arg.GetType() + " type");
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region Flags
+            foreach (var flag in result.Flags)
+                Console.WriteLine("Flag " + flag.ToString() + " is set");
+            #endregion
+
+            #region Properties
+            foreach (var property in result.Properties)
+            {
+                string name = property.Key;
+                object value = property.Value;
+                Console.WriteLine("Property " + name + " has a value " + value + " and value type is " + value.GetType());
+            }
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region Collections
+            foreach (var collection in result.Collections)
+            {
+                string name = collection.Key;
+                object[] values = collection.Value;
+                Console.WriteLine("Collection " + name + " has " + values.Count() + " value(s)");
+                int counter = 0;
+                foreach(object value in values)
+                    Console.WriteLine("\tValue " + ++counter + " is " + value + " and its type is " + value.GetType());                
+            }
+            #endregion
+
+            Console.WriteLine(Environment.NewLine);
+
+            #region ExCollections
+            foreach (var exCol in result.ExCollections)
+            {
+                string name = exCol.Key;
+                var values = exCol.Value;
+                Console.WriteLine("ExCollection " + name + " has " + values.Count() + " value(s)");
+                foreach (var value in values)
+                {
+                    string subName = value.Key;
+                    var subValue = value.Value;
+                    Console.WriteLine("\tSub Property " + subName + " has value " + subValue + " and value type is " + subValue.GetType());
+                }
+
+            }
+            #endregion
+            Console.ReadKey();
+        }
+    }
+}
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img src="assets/readingVerbs.PNG"></p>
+                    <p><b><li>Args</li></b></p>
+                    <p>Args verb is different than the other patterns, because others are identified by a name like <b>Properties, Collection, ExCollection</b> and <b>Flags</b> are a string types and then we can easily associate it since the value is known (a check value is suffisant).</p>
+                    <p>But Args are different because they dont have the same type and don't have an identification name, they could be any type, like <b>string, int, bool, float or char</b>.</p>
+                    <p>So no way to identify an arg unless if you fix their positions and make each index for a specific task.</p>
+                    <p>Assuming this command line <b>"James 29 false a"</b></p>
+                    <p>If we parse this command line we will get 4 arguments typed like so : <b>string</b>, <b>int</b>, <b>bool</b> and <b>char</b></p>
+                    <p>You have to make your application ready to associate the first index for the username which will equal to <b>James</b></p>
+                    <p>Second argument to his age which will equal to <b>29</b></p>
+                    <p>Third for activated or not for example which will be false "suspended or wait activation or whatever"</p>
+                    <p>Fourth for a user rank, in this case is <b>a</b> that could be for <b>Admin</b>, you can imagine other scenarios like <b>m</b> for moderator ...</p>
+                    <p>
+                      <pre>
+                        <code class="csharp">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using The_Morpher;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string commandLine = "James 29 false a";
+
+            ECLP eCLP = new ECLP(commandLine);
+            var result = eCLP.Parse();
+
+            if(result.Args.Count != 4)
+            {
+                Console.WriteLine("Command should have 4 arguments");
+                return;
+            }
+
+            string username = result.Args[0].ToString();
+            int age = 20; // default value
+
+            if(result.Args[1].GetType() == typeof(int))
+            {
+                age = (int)result.Args[1];
+            }
+            else
+            {
+                Console.WriteLine("Second argument for age should be an integer");
+                return;
+            }
+
+            bool activated;
+            if(result.Args[2].GetType() == typeof(bool))
+            {
+                activated = (bool)result.Args[2];
+            }
+            else
+            {
+                Console.WriteLine("Third argument for activation should be a boolean");
+                return;
+            }
+
+            char rank;
+            if(result.Args[3].GetType() == typeof(char))
+            {
+                rank = (char)result.Args[3];
+            }
+            else
+            {
+                Console.WriteLine("Fourth argument for account rank should be a char");
+                return;
+            }
+
+            Console.WriteLine("username is {0}", username);
+            Console.WriteLine("age is {0}", age);
+            Console.WriteLine("activated is {0}", activated);
+            Console.WriteLine("Account Rank {0}", rank);
+
+            Console.ReadKey();
+        }
+
+    }
+
+}                        
+                        </code>
+                      </pre>
+                    </p>
+                    <p><img id="myImg2" class="myImg" src="assets/args.PNG" alt="" onclick="ShowModalImage('myImg2')"></p>
+                    <p>If you remember i told you that it's better to keep Args verbs in the beginning of the command line.</p>
+                    <p>Well it's not an obligation, assuming this command line :</p>
+                    <p><b>"James 29 false <span style="color: red;">-p language=En</span> a"</b></p>
+                    <p>As before we used same command line as but we just add another verb as a property before last argument.</p>
+                    <p>in this case the order is not affected by the none arg verb, i mean that the last argument "a" have the index of 3 not 4 (first argument have the 0 index) as you may expect, because the -p language=En is not accounted in the arguments's index.</p>
+                    <p>So nothing will be changed in the last code we wrote because the 'a' will always have the four index in total.</p>
+                    <p>In the next chapter we will see another way to read the command using events.</p>
+                    <button type="button" class="btn btn-primary" onclick="window.location = '02-eventhandler.html'">Next Chapter 02. EventHandler>></button>
+                  </div>
+                  
+                </div>
+              </div>
+              <!----Summary---->
+              <div class="col-md-2 skills-bar">
+                <p style="color: cadetblue; font-size: 20px;">Summary</p>
+                <p><a href="description.html">Description</a></p>
+                <p><b>>>01. Verbs</b></p>
+                <p><a href="02-eventhandler.html">02. EventHandler</a></p>
+                <p><a href="03-parse.html">03. Parse</a></p>
+              </div>
+              <!----End Summary---->
+            </div>
+          </div>
+        </section>
+        <!----Services---->
+        <section id="services">
+          <div class="container">
+            <h1>Services</h1>
+            <div class="row services">
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-desktop"></i>
+                </div>
+                <h3>App Developpement</h3>
+                <p>Want me to dev an app for you ? dont hesitate to contact me.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                </div>
+                <h3>Programming</h3>
+                <p>Are you looking for a coder/teammate for your project ? Let's give it a try.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <h3>Job Invitation</h3>
+                <p>Have a proposal for me ? we can discuss about it.</p>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="icon">
+                  <i class="fa fa-cc-paypal"></i>
+                </div>
+                <h3>Donation maybe ?!</h3>
+                <p>You want to buy me a coffe ? m.elharfi@gmail.com</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick" />
+                  <input type="hidden" name="hosted_button_id" value="VN92ND2CDMX92" />
+                  <input type="image" src="https://www.paypalobjects.com/en_US/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                  <img alt="" border="0" src="https://www.paypal.com/en_FR/i/scr/pixel.gif" width="1" height="1" />
+                  </form>
+                  
+              </div>
+            </div>
+          </div>
+        </section>
+        <!----End Services-->
+        <!----Image click to enlarge---->
+        <!-- Trigger the Modal -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- The Close Button -->
+          <span class="modalClose" onclick="CloseSpan()">&times;</span>
+          <!-- Modal Content (The Image) -->
+          <img id="newMyImg" class="modal-content">
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
+        </div> 
+        <!--------End image click to enlarge-------->
+    </body>
+</html>
+<script language="javascript">
+  //button toggle show/hide div
+  function myFunction()
+  {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none")
+    {
+      x.style.display = "block";
+    }
+    else
+    {
+      x.style.display = "none";
+    }
+  } 
+  ///////////Modal////////////
+  //https://www.w3schools.com/howto/howto_css_modal_images.asp
+  var span = document.getElementsByClassName("modalClose");
+  var modal = document.getElementById("myModal");
+  var modalImg = document.getElementById("newMyImg");
+  function ShowModalImage(myImg)
+  {
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById(myImg);
+    var captionText = document.getElementById("caption");
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+  }
+  function CloseSpan()
+  {
+    modal.style.display = "none";
+  }
+  /***Detect Esc btton to close Modal***/
+  document.addEventListener('keydown', function(event){
+    if(event.key === "Escape"){
+      CloseSpan()
+    }
+  });
+  /***Hide modal when mouse clic***/
+  modal.onclick = function(){
+      CloseSpan()
+  };
+  /////////////////////////////////////////
+  </script>
